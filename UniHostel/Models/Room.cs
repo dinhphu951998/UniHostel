@@ -1,8 +1,7 @@
-namespace UniHostel.Views
+namespace UniHostel.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -12,16 +11,15 @@ namespace UniHostel.Views
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Room()
         {
+            Bills = new HashSet<Bill>();
             Renters = new HashSet<Renter>();
         }
 
         [StringLength(255)]
-        [DisplayName("Room ID")]
         public string ID { get; set; }
 
         [Required]
         [StringLength(255)]
-        [DisplayName("Room Name")]
         public string Name { get; set; }
 
         public float Square { get; set; }
@@ -31,11 +29,14 @@ namespace UniHostel.Views
         [StringLength(255)]
         public string Description { get; set; }
 
-        public bool? isAvailable { get; set; }
+        public bool? isActive { get; set; }
 
         [Required]
         [StringLength(255)]
         public string HostID { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bill> Bills { get; set; }
 
         public virtual Host Host { get; set; }
 

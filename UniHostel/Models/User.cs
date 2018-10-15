@@ -1,4 +1,4 @@
-namespace UniHostel.Views
+namespace UniHostel.Models
 {
     using System;
     using System.Collections.Generic;
@@ -18,6 +18,8 @@ namespace UniHostel.Views
         [Required]
         [StringLength(255)]
         public string Password { get; set; }
+
+        public bool? isActive { get; set; }
 
         public int RoleID { get; set; }
 

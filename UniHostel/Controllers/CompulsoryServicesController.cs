@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UniHostel.Models;
-using UniHostel.Views;
 
 namespace UniHostel.Controllers
 {
@@ -18,9 +17,13 @@ namespace UniHostel.Controllers
         // GET: CompulsoryServices
         public ActionResult Index()
         {
+            User user = Session["User"] as User;
             if (CheckSession())
             {
-                var compulsoryServices = db.CompulsoryServices.Include(c => c.Host);
+                var compulsoryServices = db.CompulsoryServices
+                                                .Include(c => c.Host)
+                                                .Where(s => s.isActive == true 
+                                                            && user.ID == s.HostID);
                 return View(compulsoryServices.ToList());
             }
             return RedirectToAction("Login", "Home");
@@ -46,24 +49,27 @@ namespace UniHostel.Controllers
         {
             if (CheckSession())
             {
-                ViewBag.HostID = new SelectList(db.Hosts, "ID", "FullName");
                 return View();
             }
             return RedirectToAction("Login", "Home");
         }
+        
 
-        // POST: CompulsoryServices/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Name,Price,Unit,Description,HostID")] CompulsoryService compulsoryService)
         {
-            string ID = Utils.getRandomID();
-            compulsoryService.ID = ID;
-            db.CompulsoryServices.Add(compulsoryService);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            User user = Session["User"] as User;
+            if(user != null)
+            {
+                string ID = Utils.getRandomID();
+                compulsoryService.ID = ID;
+                compulsoryService.isActive = true;
+                db.CompulsoryServices.Add(compulsoryService);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Login", "Home");
         }
 
         // GET: CompulsoryServices/Edit/5
@@ -78,20 +84,21 @@ namespace UniHostel.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.HostID = new SelectList(db.Hosts, "ID", "FullName", compulsoryService.HostID);
             return View(compulsoryService);
         }
 
-        // POST: CompulsoryServices/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name,Price,Unit,Description,HostID")] CompulsoryService compulsoryService)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(compulsoryService).State = EntityState.Modified;
+                var dbService = db.CompulsoryServices.Find(compulsoryService.ID);
+                dbService.Name = compulsoryService.Name;
+                dbService.Price = compulsoryService.Price;
+                dbService.Unit = compulsoryService.Unit;
+                dbService.Description = compulsoryService.Description;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -120,7 +127,8 @@ namespace UniHostel.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             CompulsoryService compulsoryService = db.CompulsoryServices.Find(id);
-            db.CompulsoryServices.Remove(compulsoryService);
+            compulsoryService.isActive = false;
+            //db.Entry(compulsoryService).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,8 +1,7 @@
-namespace UniHostel.Views
+namespace UniHostel.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -20,7 +19,6 @@ namespace UniHostel.Views
 
         [Required]
         [StringLength(255)]
-        [DisplayName("Service Name")]
         public string Name { get; set; }
 
         public float Price { get; set; }
@@ -31,6 +29,8 @@ namespace UniHostel.Views
 
         [StringLength(255)]
         public string Description { get; set; }
+
+        public bool? isActive { get; set; }
 
         [Required]
         [StringLength(255)]

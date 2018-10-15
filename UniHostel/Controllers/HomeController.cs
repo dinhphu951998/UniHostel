@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using UniHostel.Views;
+using UniHostel.Models;
 
 namespace UniHostel.Controllers
 {
@@ -11,6 +11,7 @@ namespace UniHostel.Controllers
     {
         private UniHostelDB _db = new UniHostelDB();
 
+        [HttpGet]
         public ActionResult Login()
         {
             User user = Session["User"] as User;
@@ -26,19 +27,21 @@ namespace UniHostel.Controllers
         {
             try
             {
-                User user = _db.Users.First<User>(u => u.Username == username && u.Password == password);
+                User user = _db.Users.First<User>(u => u.Username == username 
+                                                            && u.Password == password 
+                                                            && u.isActive == true);
                 if (user != null)
                 {
                     Session["User"] = user;
                     Session.Timeout = 30;
                     switch (user.RoleID)
                     {
-                        case 1:
-                            break;
+                        case 1: //Admin
+                            return RedirectToAction("Index", "Admin");
                         case 2: // Host
                             return RedirectToAction("Index", "Hosts");
                         case 3:
-                            break;
+                            return RedirectToAction("Index", "Bills");
                     }
                 }
             }

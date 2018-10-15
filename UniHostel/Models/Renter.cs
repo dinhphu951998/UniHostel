@@ -1,4 +1,4 @@
-namespace UniHostel.Views
+namespace UniHostel.Models
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,6 @@ namespace UniHostel.Views
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Renter()
         {
-            Bills = new HashSet<Bill>();
             Roommates = new HashSet<Roommate>();
         }
 
@@ -49,9 +48,6 @@ namespace UniHostel.Views
         [Required]
         [StringLength(255)]
         public string RoomID { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bill> Bills { get; set; }
 
         public virtual Room Room { get; set; }
 

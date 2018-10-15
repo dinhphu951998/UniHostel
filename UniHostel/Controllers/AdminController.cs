@@ -2,22 +2,26 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using UniHostel.Views;
+using UniHostel.Models;
 
 namespace UniHostel.Controllers
 {
-    public class UsersController : Controller
+    public class AdminController : Controller
     {
         private UniHostelDB db = new UniHostelDB();
 
         // GET: Users
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.Host).Include(u => u.Renter).Include(u => u.Role);
+            var users = db.Users.Include(u => u.Host)
+                                .Include(u => u.Renter)
+                                .Include(u => u.Role)
+                                .Where(u => u.RoleID == 2 && u.isActive == true);
             return View(users.ToList());
         }
 
@@ -50,24 +54,33 @@ namespace UniHostel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Username,Password,RoleID")] User user)
+        public ActionResult Create(User user, Host host)
         {
+            user.ID = Utils.getRandomID();
+            user.RoleID = 2;
+            var userInDb = db.Users.Where(u => u.Username == user.Username);
+            if (userInDb.Count() != 0)
+            {
+                ModelState.AddModelError(String.Empty, "This username already exists.");
+                return View(user);
+            }
             if (ModelState.IsValid)
             {
+                user.isActive = true;
+                host.isActive = true;
+                user.Host = host;
                 db.Users.Add(user);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-
-            ViewBag.ID = new SelectList(db.Hosts, "ID", "FullName", user.ID);
-            ViewBag.ID = new SelectList(db.Renters, "ID", "FullName", user.ID);
-            ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName", user.RoleID);
             return View(user);
         }
 
         // GET: Users/Edit/5
         public ActionResult Edit(string id)
         {
+            var usertest = db.Users.Find(id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -77,29 +90,20 @@ namespace UniHostel.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ID = new SelectList(db.Hosts, "ID", "FullName", user.ID);
-            ViewBag.ID = new SelectList(db.Renters, "ID", "FullName", user.ID);
-            ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName", user.RoleID);
             return View(user);
         }
 
-        // POST: Users/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Username,Password,RoleID")] User user)
+        public ActionResult Edit(Host host)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
+                db.Entry(host).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID = new SelectList(db.Hosts, "ID", "FullName", user.ID);
-            ViewBag.ID = new SelectList(db.Renters, "ID", "FullName", user.ID);
-            ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName", user.RoleID);
-            return View(user);
+            return View(host);
         }
 
         // GET: Users/Delete/5
@@ -122,8 +126,10 @@ namespace UniHostel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+            Host host = db.Hosts.Find(id);
+            host.isActive = false;
             User user = db.Users.Find(id);
-            db.Users.Remove(user);
+            user.isActive = false;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

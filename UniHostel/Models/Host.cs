@@ -1,4 +1,4 @@
-namespace UniHostel.Views
+namespace UniHostel.Models
 {
     using System;
     using System.Collections.Generic;
@@ -40,7 +40,7 @@ namespace UniHostel.Views
         [StringLength(255)]
         public string Description { get; set; }
 
-        public bool isActive { get; set; }
+        public bool? isActive { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdvancedService> AdvancedServices { get; set; }

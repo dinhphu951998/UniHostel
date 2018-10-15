@@ -1,3 +1,5 @@
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.Xml.XmlDocument.dll
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\VBCSCompiler.exe
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\ApplicationInsights.config
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\UniHostel.dll.config
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\UniHostel.dll
@@ -40,13 +42,11 @@ E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.Security.Principal.
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.Text.Encoding.CodePages.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.ValueTuple.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.Xml.ReaderWriter.dll
-E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.Xml.XmlDocument.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.Xml.XPath.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.Xml.XPath.XDocument.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\vbc.exe
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\vbc.exe.config
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\vbc.rsp
-E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\VBCSCompiler.exe
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\VBCSCompiler.exe.config
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Antlr3.Runtime.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\EntityFramework.dll
@@ -88,8 +88,8 @@ E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.AI.DependencyCollector.
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.AI.WindowsServer.xml
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.AI.Web.xml
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Debug\UniHostel.csprojAssemblyReference.cache
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Debug\UniHostel.csproj.CoreCompileInputs.cache
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Debug\UniHostel.csproj.CopyComplete
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Debug\UniHostel.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Debug\UniHostel.pdb
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Debug\UniHostel.csprojAssemblyReference.cache

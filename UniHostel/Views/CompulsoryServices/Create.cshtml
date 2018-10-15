@@ -1,11 +1,11 @@
-﻿@model UniHostel.Views.CompulsoryService
+﻿@model UniHostel.Models.CompulsoryService
     
 
 @{
     ViewBag.Title = "Create New Compulsory Service";
 }
 
-<h2>Create</h2>
+<h2>Create Compulsory Service</h2>
 
 
 @using (Html.BeginForm()) 
@@ -13,7 +13,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>CompulsoryService</h4>
+        <h4>Compulsory Service</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @*<div class="form-group">
@@ -55,7 +55,7 @@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
-        @Html.Hidden("HostID", (Session["User"] as UniHostel.Views.User).ID)
+        @Html.Hidden("HostID", (Session["User"] as UniHostel.Models.User).ID)
 
         @*<div class="form-group">
             @Html.LabelFor(model => model.HostID, "HostID", htmlAttributes: new { @class = "control-label col-md-2" })

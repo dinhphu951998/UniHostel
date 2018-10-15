@@ -1,4 +1,4 @@
-namespace UniHostel.Views
+namespace UniHostel.Models
 {
     using System;
     using System.Data.Entity;
@@ -32,18 +32,6 @@ namespace UniHostel.Views
                 .IsUnicode(false);
 
             modelBuilder.Entity<AdvancedService>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<AdvancedService>()
-                .Property(e => e.Unit)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<AdvancedService>()
-                .Property(e => e.Description)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<AdvancedService>()
                 .Property(e => e.HostID)
                 .IsUnicode(false);
 
@@ -60,10 +48,6 @@ namespace UniHostel.Views
                 .Property(e => e.BillID)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<BillAdvancedServiceDetail>()
-                .Property(e => e.Description)
-                .IsUnicode(false);
-
             modelBuilder.Entity<BillCompulsoryServiceDetail>()
                 .Property(e => e.BillID)
                 .IsUnicode(false);
@@ -72,20 +56,12 @@ namespace UniHostel.Views
                 .Property(e => e.CompulsoryServiceID)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<BillCompulsoryServiceDetail>()
-                .Property(e => e.Description)
-                .IsUnicode(false);
-
             modelBuilder.Entity<Bill>()
                 .Property(e => e.ID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Bill>()
-                .Property(e => e.Description)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Bill>()
-                .Property(e => e.RenterID)
+                .Property(e => e.RoomID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Bill>()
@@ -103,18 +79,6 @@ namespace UniHostel.Views
                 .IsUnicode(false);
 
             modelBuilder.Entity<CompulsoryService>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<CompulsoryService>()
-                .Property(e => e.Unit)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<CompulsoryService>()
-                .Property(e => e.Description)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<CompulsoryService>()
                 .Property(e => e.HostID)
                 .IsUnicode(false);
 
@@ -128,23 +92,11 @@ namespace UniHostel.Views
                 .IsUnicode(false);
 
             modelBuilder.Entity<Host>()
-                .Property(e => e.FullName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Host>()
-                .Property(e => e.Address)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Host>()
                 .Property(e => e.Phone)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Host>()
                 .Property(e => e.Mail)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Host>()
-                .Property(e => e.Description)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Host>()
@@ -167,15 +119,7 @@ namespace UniHostel.Views
                 .IsUnicode(false);
 
             modelBuilder.Entity<Renter>()
-                .Property(e => e.FullName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Renter>()
                 .Property(e => e.Mail)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Renter>()
-                .Property(e => e.HomeTown)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Renter>()
@@ -183,17 +127,8 @@ namespace UniHostel.Views
                 .IsUnicode(false);
 
             modelBuilder.Entity<Renter>()
-                .Property(e => e.Description)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Renter>()
                 .Property(e => e.RoomID)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Renter>()
-                .HasMany(e => e.Bills)
-                .WithRequired(e => e.Renter)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Renter>()
                 .HasMany(e => e.Roommates)
@@ -214,15 +149,7 @@ namespace UniHostel.Views
                 .IsUnicode(false);
 
             modelBuilder.Entity<Roommate>()
-                .Property(e => e.FullName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Roommate>()
                 .Property(e => e.Mail)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Roommate>()
-                .Property(e => e.HomeTown)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Roommate>()
@@ -238,16 +165,13 @@ namespace UniHostel.Views
                 .IsUnicode(false);
 
             modelBuilder.Entity<Room>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Room>()
-                .Property(e => e.Description)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Room>()
                 .Property(e => e.HostID)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Room>()
+                .HasMany(e => e.Bills)
+                .WithRequired(e => e.Room)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Room>()
                 .HasMany(e => e.Renters)

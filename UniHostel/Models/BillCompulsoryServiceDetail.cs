@@ -1,4 +1,4 @@
-namespace UniHostel.Views
+namespace UniHostel.Models
 {
     using System;
     using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace UniHostel.Views
         public string CompulsoryServiceID { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime Time { get; set; }
+        public DateTime? Time { get; set; }
 
         public int PreNum { get; set; }
 

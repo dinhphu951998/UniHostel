@@ -1,0 +1,61 @@
+﻿@model IEnumerable<UniHostel.Models.Bill>
+@using UniHostel.Models;
+
+@{
+    ViewBag.Title = "Bill History";
+    Layout = "~/Views/Shared/_LayoutBillForRenter.cshtml";
+}
+
+<h2>Bill History</h2>
+
+@{
+    User user = Session["User"] as User;
+    if (user.Host != null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        <p>
+            @Html.ActionLink("Create new", "Create", "Bills")
+        </p>
+    }
+}
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Renter Name</th>
+            <th scope="col">Room Name</th>
+            <th scope="col">Time</th>
+            <th scope="col">Host Name</th>
+            <th scope="col">Total</th>
+            <th scope="col">is Paid</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">
+                    @Html.DisplayFor(modelItem => item.Room.Name)
+                </th>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Room.Renters.FirstOrDefault().FullName)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isPaid)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
