@@ -21,10 +21,8 @@ namespace UniHostel.Models
         [StringLength(255)]
         public string FullName { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime StartDate { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime? EndDate { get; set; }
 
         [Column(TypeName = "date")]

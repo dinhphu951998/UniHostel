@@ -1,22 +1,27 @@
 ﻿@model UniHostel.Models.Bill
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Bill History Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
+@{
+    User user = Session["User"] as User;
+    if (user.Host == null)
+    {
+        Layout = "~/Views/Shared/_LayoutBillForRenter.cshtml";
+    }
+}
 <div>
-    <h4>Bill</h4>
+    <h4>Bill Details</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Renter.FullName)
+            @Html.DisplayName("Fullname")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Renter.FullName)
+            @Html.DisplayFor(model => model.Room.Renters.OrderByDescending(r => r.StartDate).FirstOrDefault().FullName)
         </dd>
 
         <dt>
@@ -26,6 +31,121 @@
         <dd>
             @Html.DisplayFor(model => model.Time)
         </dd>
+
+        <div class="h3">
+            <h4 class="h">Compulsory Service</h4>
+        </div>
+        <!--Compulsory service detail table-->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-table"></i>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Comp Name</th>
+                                <th>Previous Number</th>
+                                <th>Current Number</th>
+                                <th>Unit</th>
+                                <th>Price</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var services = Model.BillCompulsoryServiceDetails;
+                                for (int i = 0; i < services.Count(); i++)
+                                {
+                                    var service = services.ElementAt(i);
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(model => service.CompulsoryService.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => service.PreNum)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => service.CurNum)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => service.CompulsoryService.Unit)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => service.CompulsoryService.Price)
+                                        </td>
+                                        <td>
+                                            @Html.Raw(service.Amount.ToString("F0"))
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer small text-muted"></div>
+        </div>
+
+        <div class="h">
+            <h4>Advanced Service</h4>
+        </div>
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-table"></i>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Service Name</th>
+                                <th>Unit</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @{
+                                var AdvancedServices = Model.BillAdvancedServiceDetails;
+                                for (int i = 0; i < AdvancedServices.Count(); i++)
+                                {
+                                    var service = AdvancedServices.ElementAt(i);
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(model => service.AdvancedService.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => service.AdvancedService.Unit)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => service.Quantity)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => service.AdvancedService.Price)
+                                        </td>
+                                        <td>
+                                            @Html.Raw(service.Amount.ToString("F0"))
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card-footer small text-muted"></div>
+
+            </div>
+        </div>
+
+
 
         <dt>
             @Html.DisplayNameFor(model => model.OtherFee)
@@ -40,7 +160,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Total)
+            @Html.Raw(Model.Total.ToString("N0"))
         </dd>
 
         <dt>
@@ -48,7 +168,18 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.isPaid)
+            @if (Model.isPaid == true)
+            {
+                <font color="green">
+                    <i class="fas fa-check"></i>
+                </font>
+            }
+            else
+            {
+                <font color="red">
+                    <i class="fas fa-times"></i>
+                </font>
+            }
         </dd>
 
         <dt>
@@ -61,7 +192,15 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div>
+    @if (user.Host != null)
+    {
+
+        <a href="@Url.Action("Edit", new { id = Model.ID })" title="Click here to edit">
+            <i class="fas fa-edit"></i> Edit
+        </a>
+    }
+    | <a href="@Url.Action("Index")">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to List
+    </a>
+</div>

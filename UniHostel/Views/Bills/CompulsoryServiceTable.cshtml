@@ -22,7 +22,6 @@
                             <th>Unit</th>
                             <th>Price</th>
                             <th>Amount</th>
-                            <th>Note</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,7 +33,7 @@
                                 <tr>
                                     <td>
                                         @Html.Raw(service.Name)
-                                        @Html.Hidden("CompulsoryServiceID", service.ID)
+                                        @Html.Hidden("CompulsoryServiceID", service.ID, new {@class= "form-control CompulsoryServiceID" })
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(details => details.PreNum,
@@ -54,16 +53,9 @@
                                         @Html.Raw(service.Price.ToString())
                                     </td>
                                     <td class="amount">
-                                        @Html.TextBoxFor(details => details.Amount )
+                                        0
                                     </td>
-                                    <td>
-                                        <button type="button" class="btn btn-default" aria-label="Left Align">
-                                            Edit
-                                        </button>
-                                        <button type="button" class="btn btn-default" aria-label="Left Align">
-                                            Delete
-                                        </button>
-                                    </td>
+                                    @Html.HiddenFor(details => details.Amount)
                                 </tr>
                             }
                         }

@@ -22,12 +22,17 @@ namespace UniHostel.Models
         [StringLength(255)]
         public string Name { get; set; }
 
+        [StringLength(255)]
+        public string image { get; set; }
+
         public float Square { get; set; }
 
         public float Price { get; set; }
 
         [StringLength(255)]
         public string Description { get; set; }
+
+        public bool? isAvailable { get; set; }
 
         public bool? isActive { get; set; }
 

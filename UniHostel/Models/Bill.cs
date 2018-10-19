@@ -18,7 +18,6 @@ namespace UniHostel.Models
         [StringLength(255)]
         public string ID { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime Time { get; set; }
 
         public float? OtherFee { get; set; }

@@ -1,7 +1,4 @@
-﻿/// <reference path="sweetalert2.js" />
-
-//confirm
-function confirmDeleteContent(id) {
+﻿function confirmDeleteContent(id) {
     swal({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",

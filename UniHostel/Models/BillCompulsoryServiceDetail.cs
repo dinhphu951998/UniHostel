@@ -18,7 +18,6 @@ namespace UniHostel.Models
         [StringLength(255)]
         public string CompulsoryServiceID { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime? Time { get; set; }
 
         public int PreNum { get; set; }

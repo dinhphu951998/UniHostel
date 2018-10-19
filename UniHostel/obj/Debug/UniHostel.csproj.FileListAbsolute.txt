@@ -1,5 +1,3 @@
-E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.Xml.XmlDocument.dll
-E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\VBCSCompiler.exe
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\ApplicationInsights.config
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\UniHostel.dll.config
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\UniHostel.dll
@@ -42,11 +40,13 @@ E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.Security.Principal.
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.Text.Encoding.CodePages.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.ValueTuple.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.Xml.XmlDocument.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.Xml.XPath.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\System.Xml.XPath.XDocument.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\vbc.exe
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\vbc.exe.config
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\vbc.rsp
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\VBCSCompiler.exe
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\roslyn\VBCSCompiler.exe.config
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Antlr3.Runtime.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\EntityFramework.dll
@@ -73,6 +73,7 @@ E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\System.Web.WebPages.Razor.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\WebGrease.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\EntityFramework.xml
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\EntityFramework.SqlServer.xml
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Newtonsoft.Json.xml
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\System.Web.Helpers.xml
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\System.Web.Mvc.xml
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\System.Web.Optimization.xml
@@ -80,7 +81,6 @@ E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\System.Web.Razor.xml
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\System.Web.WebPages.xml
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\System.Web.WebPages.Deployment.xml
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\System.Web.WebPages.Razor.xml
-E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Newtonsoft.Json.xml
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Antlr3.Runtime.pdb
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\System.Diagnostics.DiagnosticSource.xml
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.AspNet.TelemetryCorrelation.xml

@@ -39,8 +39,8 @@ namespace UniHostel.Controllers
                         case 1: //Admin
                             return RedirectToAction("Index", "Admin");
                         case 2: // Host
-                            return RedirectToAction("Index", "Hosts");
-                        case 3:
+                            return RedirectToAction("Index", "Renters");
+                        case 3:// Renter
                             return RedirectToAction("Index", "Bills");
                     }
                 }

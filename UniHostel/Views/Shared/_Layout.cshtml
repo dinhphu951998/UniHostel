@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - UniHostel Application</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/bill.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -21,6 +21,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Profile", "Details", "Users")</li>
                     <li>@Html.ActionLink("Room Management", "Index", "Home")</li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -32,13 +33,13 @@
                             <li class="dropdown-item">@Html.ActionLink("Advanced Management", "Index", "AdvancedServices")</li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("Renter Management", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Renter Management", "Index", "Renters")</li>
                     <li>@Html.ActionLink("Bill Management", "Index", "Bills")</li>
                     <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
                 </ul>
             </div>
+           
         </div>
-
     </div>
 
     <div class="container body-content">
@@ -51,8 +52,6 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Scripts/sweetalert.min.js")
-    <script src="~/Scripts/bill.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

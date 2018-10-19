@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -15,13 +16,14 @@ namespace UniHostel.Controllers
         private UniHostelDB db = new UniHostelDB();
 
         // GET: Renters
-        //Get all bill of renter
         public ActionResult Index()
         {
-            User user = Session["User"] as User;
-            var bills = db.Bills.Join(db.Renters, r => r.RoomID, renter => renter.RoomID, (b, r) => r)
-                                 .Where(renter => renter.ID == user.ID);
-            return View(bills.ToList());
+            if (Session["User"] is User user)
+            {
+                var renters = db.Renters.Where(renter => renter.EndDate == null && renter.Room.HostID == user.ID);
+                return View(renters.ToList());
+            }
+            return RedirectToAction("Login", "Home");
         }
 
         // GET: Renters/Details/5
@@ -42,12 +44,17 @@ namespace UniHostel.Controllers
         // GET: Renters/Create
         public ActionResult Create()
         {
-            ViewBag.RoomID = new SelectList(db.Rooms, "ID", "Name");
-            ViewBag.ID = new SelectList(db.Users, "ID", "Username");
-            return View();
+            if(Session["User"] is User user)
+            {
+                var availableRooms = db.Rooms.Where(room => room.HostID == user.ID && room.isAvailable == true);
+                ViewBag.RoomID = new SelectList(availableRooms.ToList(), "ID", "Name");
+                ViewBag.ID = Utils.getRandomID();
+                return View();
+            }
+            return RedirectToAction("Login", "Home");
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,FullName,StartDate,EndDate,BirthDate,Mail,HomeTown,Phone,Description,RoomID")] Renter renter)

@@ -17,8 +17,8 @@ namespace UniHostel.Controllers
         // GET: Hosts
         public ActionResult Index()
         {
-            var renters = db.Renters.Include(r => r.Room).Include(r => r.User);
-            return View(renters.ToList());
+            //var renters = db.Renters.Include(r => r.Room).Include(r => r.User);
+            return View();
         }
 
         // GET: Hosts/Details/5

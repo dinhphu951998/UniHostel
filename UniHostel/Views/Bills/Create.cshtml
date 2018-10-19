@@ -8,7 +8,7 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Bills", FormMethod.Post, new { @id = "bill-form" }))
 {
     @Html.AntiForgeryToken()
     
@@ -34,7 +34,7 @@
 
     @Html.Partial("CompulsoryServiceTable", new BillCompulsoryServiceDetail())
 
-    @*@Html.Partial("AdvancedServiceTable")*@
+    @Html.Partial("AdvancedServiceTable", new BillAdvancedServiceDetail())
 
     <div class="form-group">
         @Html.LabelFor(model => model.OtherFee, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -67,9 +67,12 @@
     </div>
 </div>
 }
-
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @if (Session["User"] is User user && user.Host != null)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) 
+    }
+    | @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {

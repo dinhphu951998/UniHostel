@@ -9,21 +9,29 @@ namespace UniHostel
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-ui-1.12.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
-
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.min.js"));
+                      "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/bill.js",
+                      "~/Scripts/DatePickerJQuery.js",
+                      "~/Scripts/userpage.js",
+                      "~/Scripts/alert/sweetalert2.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bill.css",
+                      "~/Content/jquery-ui.css",
                       "~/Content/bootstrap.min.css",
+                      "~/Content/bootstrap-datepicker3.min.css",
+                      "~/Content/bootstrap-datepicker.standalone.min.css",
+                      "~/Content/bootstrap-datepicker3.standalone.min.css",
+                      "~/Content/bootstrap-datepicker.min.css",
+                      "~/Scripts/alert/sweetalert2.css",
+                      "~/url/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css",
                       "~/Content/site.css"));
         }
     }

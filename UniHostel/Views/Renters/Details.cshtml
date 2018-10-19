@@ -1,8 +1,23 @@
 ﻿@model UniHostel.Models.Renter
 
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "Bill History";
+                Layout = "~/Views/Shared/_LayoutBillForRenter.cshtml";
+}
+
+<h2>Bill History</h2>
+
+@{
+    User user = Session["User"] as User;
+    if (user.Host != null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        <p>
+            @Html.ActionLink("Create new", "Create", "Bills")
+        </p>
+    }
 }
 
 <h2>Details</h2>
@@ -93,7 +108,17 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div>
+    @if (user.Host != null)
+    {
+
+        <a href="@Url.Action("Edit", new { id = Model.ID })" title="Click here to edit">
+            <i class="fas fa-edit"></i> Edit
+        </a>
+    }
+    | <a href="@Url.Action("Index")">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to List
+    </a>
+</div>
+
