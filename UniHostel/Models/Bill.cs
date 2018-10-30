@@ -33,6 +33,10 @@ namespace UniHostel.Models
         [StringLength(255)]
         public string RoomID { get; set; }
 
+        [Required]
+        [StringLength(255)]
+        public string RenterID { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BillAdvancedServiceDetail> BillAdvancedServiceDetails { get; set; }
 
@@ -40,5 +44,7 @@ namespace UniHostel.Models
         public virtual ICollection<BillCompulsoryServiceDetail> BillCompulsoryServiceDetails { get; set; }
 
         public virtual Room Room { get; set; }
+
+        public virtual Renter Renter { get; set; }
     }
 }

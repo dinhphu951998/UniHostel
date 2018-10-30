@@ -130,6 +130,18 @@ namespace UniHostel.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult MarkLeave(string id)
+        {
+            var renter = db.Renters.Find(id);
+            if(renter != null)
+            {
+                renter.EndDate = DateTime.Now;
+                renter.Room.isAvailable = true;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

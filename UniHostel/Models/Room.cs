@@ -23,7 +23,7 @@ namespace UniHostel.Models
         public string Name { get; set; }
 
         [StringLength(255)]
-        public string image { get; set; }
+        public string Image { get; set; }
 
         public float Square { get; set; }
 

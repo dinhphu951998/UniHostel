@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Renter</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Room.Name)
+            @Html.Raw("Room Name")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FullName)
@@ -49,6 +49,10 @@
             <td>
                 <a href="@Url.Action("Delete", new { id = item.ID })" title="Nhấn vào đây để xóa" style="color: #dd4b39;">
                     <i class="fa fa-times-circle" aria-hidden="true"></i> Delete
+                </a>
+                <br />
+                <a href="@Url.Action("MarkLeave", new { id = item.ID })" title="This renter has left" style="color: #66ccff;">
+                    <i class="fas fa-sign-out-alt"></i> Mark leave
                 </a>
             </td>
         </tr>

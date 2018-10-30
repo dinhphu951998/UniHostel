@@ -9,7 +9,7 @@
     User user = Session["User"] as User;
     if (user.Host == null)
     {
-        Layout = "~/Views/Shared/_LayoutBillForRenter.cshtml";
+        Layout = "~/Views/Shared/_LayoutForRenter.cshtml";
     }
 }
 <div>
@@ -196,11 +196,16 @@
     @if (user.Host != null)
     {
 
+        <a href="@Url.Action("ExportExcel", new { id = Model.ID })" title="Click here to edit">
+            <i class="far fa-file-excel"></i> Export to Excel file
+        </a>
+        <label> | </label>
         <a href="@Url.Action("Edit", new { id = Model.ID })" title="Click here to edit">
             <i class="fas fa-edit"></i> Edit
         </a>
+        <label> | </label>
     }
-    | <a href="@Url.Action("Index")">
+    <a href="@Url.Action("Index")">
         <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to List
     </a>
 </div>

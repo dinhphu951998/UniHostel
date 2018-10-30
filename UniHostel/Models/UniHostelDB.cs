@@ -20,7 +20,6 @@ namespace UniHostel.Models
         public virtual DbSet<Host> Hosts { get; set; }
         public virtual DbSet<Renter> Renters { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Roommate> Roommates { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -62,6 +61,10 @@ namespace UniHostel.Models
 
             modelBuilder.Entity<Bill>()
                 .Property(e => e.RoomID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Bill>()
+                .Property(e => e.RenterID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Bill>()
@@ -131,7 +134,7 @@ namespace UniHostel.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Renter>()
-                .HasMany(e => e.Roommates)
+                .HasMany(e => e.Bills)
                 .WithRequired(e => e.Renter)
                 .WillCascadeOnDelete(false);
 
@@ -143,22 +146,6 @@ namespace UniHostel.Models
                 .HasMany(e => e.Users)
                 .WithRequired(e => e.Role)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Roommate>()
-                .Property(e => e.ID)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Roommate>()
-                .Property(e => e.Mail)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Roommate>()
-                .Property(e => e.Phone)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Roommate>()
-                .Property(e => e.RenterID)
-                .IsUnicode(false);
 
             modelBuilder.Entity<Room>()
                 .Property(e => e.ID)

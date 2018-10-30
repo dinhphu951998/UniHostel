@@ -45,22 +45,39 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.2.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.2\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="MailKit, Version=2.0.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.2.0.6\lib\net45\MailKit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MimeKit, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.2.0.6\lib\net45\MimeKit.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -164,6 +181,7 @@
     <Compile Include="Controllers\HostsController.cs" />
     <Compile Include="Controllers\RentersController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="ExtensionMethod\MyAutoMapper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -176,15 +194,60 @@
     <Compile Include="Models\Renter.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Room.cs" />
-    <Compile Include="Models\Roommate.cs" />
     <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\UniHostelDB.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserRenterViewModel.cs" />
     <Compile Include="Models\Utils.cs" />
+    <Compile Include="Models\ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExtensionMethod\DataExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\animate.css" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\colors\default.css" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\colors\megna-dark.css" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\css\fontawesome-all.css" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-regular-400.svg" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-arrows-10.svg" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-basic-10.svg" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-basic-elaboration-10.svg" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-ecommerce-10.svg" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-music-10.svg" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-software-10.svg" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-weather-10.svg" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\linea.css" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\material-design-iconic-font\css\materialdesignicons.min.css" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfontd41d.html" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfontdc99-2.html" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfontdc99.html" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfontdc99.svg" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\simple-line-icons\css\simple-line-icons.css" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\simple-line-icons\fonts\Simple-Line-Icons4c82.svg" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\themify-icons\fonts\themify9f24.svg" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\themify-icons\themify-icons.css" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\weather-icons\css\weather-icons.min.css" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\weather-icons\fonts\weathericons-regular-webfont.svg" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\spinners.css" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\style.css" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\js\custom.min.js" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\js\jquery.slimscroll.js" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\js\reset-password.js" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\js\waves.js" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\login.html" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\recoverpw.html" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\register.html" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\plugins\bower_components\jquery\dist\jquery.min.js" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\plugins\bower_components\sidebar-nav\dist\sidebar-nav.min.js" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\plugins\bower_components\styleswitcher\jQuery.style.switcher.js" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\plugins\images\admin-logo.png" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\plugins\images\favicon.png" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\plugins\images\login-register.jpg" />
     <Content Include="Content\bill\1.css" />
     <Content Include="Content\bill\1.js" />
     <Content Include="Content\bootstrap-datepicker.css" />
@@ -205,6 +268,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom.css" />
     <Content Include="Content\images\ui-icons_444444_256x240.png" />
     <Content Include="Content\images\ui-icons_555555_256x240.png" />
     <Content Include="Content\images\ui-icons_777620_256x240.png" />
@@ -278,6 +342,70 @@
     <Content Include="Content\bootstrap-datepicker3.css.map" />
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\bootstrap\dist\fonts\glyphicons-halflings-regulard41d.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-brands-400d41d.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-regular-400d41d.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\font-awesome\webfonts\fa-solid-900d41d.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-arrows-10.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-arrows-10.ttf" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-arrows-10.woff" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-arrows-10d41d.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-basic-10.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-basic-10.ttf" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-basic-10.woff" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-basic-10d41d.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-basic-elaboration-10.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-basic-elaboration-10.ttf" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-basic-elaboration-10.woff" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-basic-elaboration-10d41d.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-ecommerce-10.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-ecommerce-10.ttf" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-ecommerce-10.woff" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-ecommerce-10d41d.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-music-10.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-music-10.ttf" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-music-10.woff" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-music-10d41d.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-software-10.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-software-10.ttf" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-software-10.woff" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-software-10d41d.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-weather-10.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-weather-10.ttf" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-weather-10.woff" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\linea-icons\fonts\linea-weather-10d41d.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfontdc99.woff" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfontdc99.woff2" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\simple-line-icons\fonts\Simple-Line-Icons4c82.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\simple-line-icons\fonts\Simple-Line-Icons4c82.ttf" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\simple-line-icons\fonts\Simple-Line-Icons4c82.woff" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\simple-line-icons\fonts\Simple-Line-Icons4c82.woff2" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\simple-line-icons\fonts\Simple-Line-Iconsd41d.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\themify-icons\fonts\themify9f24.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\themify-icons\fonts\themify9f24.ttf" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\themify-icons\fonts\themify9f24.woff" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\themify-icons\fonts\themifyd41d.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\weather-icons\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\weather-icons\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\weather-icons\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\weather-icons\fonts\weathericons-regular-webfont.woff2" />
+    <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\weather-icons\fonts\weathericons-regular-webfontd41d.eot" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -381,6 +509,13 @@
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\DatePickerJQuery.js" />
     <Content Include="Scripts\userpage.js" />
+    <None Include="Views\Home\MailHtmlMessage.cshtml" />
+    <Content Include="Views\Users\ChangePassword.cshtml" />
+    <None Include="Views\Shared\400.cshtml" />
+    <None Include="Views\Shared\403.cshtml" />
+    <None Include="Views\Shared\404.cshtml" />
+    <None Include="Views\Shared\500.cshtml" />
+    <None Include="Views\Shared\503.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -439,8 +574,9 @@
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\HostDetails.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\RenterDetails.cshtml" />
+    <Content Include="Views\Home\Signup.cshtml" />
+    <Content Include="Views\Home\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -460,6 +596,38 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

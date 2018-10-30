@@ -11,6 +11,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/UserPage.css" rel="stylesheet" />
 
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <title>@ViewBag.Title</title>
 </head>
 <body>
@@ -29,12 +34,15 @@
                     <a class="nav-link" href="@Url.Action("Logout", "Home")">Log out <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0" action="#" method="get">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="SearchValue">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-success">Search</button>
             </form>
         </div>
     </nav>
+
     <div class="container">
         @RenderBody()
     </div>
@@ -42,8 +50,8 @@
     <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
     <script src="~/Content/bill/1.js"></script>
     <script src="~/Content/bill/bootstrap.min.js"></script>
-    <script src="~/Content/bill/popper.min.js"></script>
     <script src="~/Scripts/userpage.js"></script>
+    <script src="~/Content/bill/popper.min.js"></script>
 </body>
 </html>
 @RenderSection("scripts", required: false)

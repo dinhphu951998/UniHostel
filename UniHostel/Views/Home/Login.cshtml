@@ -2,63 +2,91 @@
     Layout = "";
 }
 <!DOCTYPE html>
-<html lang='en' class=''>
+<html lang="en">
 <head>
-    <script src='//static.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js'></script>
-    <script src='//static.codepen.io/assets/editor/live/css_live_reload_init-e9c0cc5bb634d3d14b840de051920ac153d7d3d36fb050abad285779d7e5e8bd.js'></script>
-    <meta charset='UTF-8'>
-    <meta name="robots" content="noindex">
-    <link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
-    <link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
-    <link rel="canonical" href="https://codepen.io/nedev/pen/EVaGqW" />
-    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-    <link href="~/Content/custom-login.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    @Styles.Render("~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar/css")
+    <link href="~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar/css/colors/default.css" rel="stylesheet" id="theme" />
 
 </head>
 <body>
-    <div id="login-button">
-        <img src="https://dqcgrsy5v35b9.cloudfront.net/cruiseplanner/assets/img/icons/login-w-icon.png" />
-        
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="cssload-speeding-wheel"></div>
     </div>
-    <div id="container">
-        <h1>Log In</h1>
-        <span class="close-btn">
-            <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png" />
-        </span>
-
-        <form action="@Url.Action("Login")" method="post">
-            <input type="text" name="username" placeholder="E-mail">
-            <input type="password" name="password" placeholder="Password">
-            <input type="submit" value="Log in" />
-            <div id="remember-container">
-                <input type="checkbox" id="checkbox-2-1" class="checkbox" checked="checked" />
-                <span id="remember">Remember me</span>
-                <span id="forgotten">Forgotten password</span>
+    <section id="wrapper" class="new-login-register">
+        <div class="lg-info-panel">
+            <div class="inner-panel">
+                <a href="javascript:void(0)" class="p-20 di"><img src="../Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar/../plugins/images/admin-logo.png"></a>
+                <div class="lg-content">
+                </div>
             </div>
-        </form>
-        <h3>
-            <font color="red">@ViewBag.Message</font>
-        </h3>
-    </div>
-
-    <!-- Forgotten Password Container -->
-    <div id="forgotten-container">
-        <h1>Forgotten</h1>
-        <span class="close-btn">
-            <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png" />
-        </span>
-
-        <form>
-            <input type="email" name="email" placeholder="E-mail">
-            <a href="#" class="orange-btn">Get new password</a>
-        </form>
-    </div>
-    <script src='//static.codepen.io/assets/common/stopExecutionOnTimeout-41c52890748cd7143004e05d3c5f786c66b19939c4500ce446314d1748483e13.js'></script>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js'></script>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="~/Scripts/custom-login.js"></script>
+        </div>
+        <div class="new-login-box">
+            <div class="white-box">
+                <h3 class="box-title m-b-0">Sign In</h3>
+                <small>
+                    <font color="red">
+                        @ViewBag.Message
+                    </font>
+                </small>
+                <form class="form-horizontal new-lg-form" id="loginform" method="post" action="@Url.Action("Login")">
+                    <div class="form-group  m-t-20">
+                        <div class="col-xs-12">
+                            <label>Username</label>
+                            <input class="form-control" type="text" required="" placeholder="Username" name="username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label>Password</label>
+                            <input class="form-control" type="password" required="" placeholder="Password" name="password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Forgot password?</a>
+                        </div>
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" type="submit">Log In</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
+                            <div class="social"><a href="javascript:void(0)" class="btn  btn-facebook" data-toggle="tooltip" title="Login with Facebook"> <i aria-hidden="true" class="fab fa-facebook-f"></i> </a> <a href="javascript:void(0)" class="btn btn-googleplus" data-toggle="tooltip" title="Login with Google"> <i aria-hidden="true" class="fab fa-google-plus-g"></i> </a> </div>
+                        </div>
+                    </div>
+                    <div class="form-group m-b-0">
+                        <div class="col-sm-12 text-center">
+                            <p>Don't have an account? <a href="@Url.Action("Signup")" class="text-primary m-l-5"><b>Sign Up</b></a></p>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal" id="recoverform" action="@Url.Action("RecoverPassword")">
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <h3>Recover Password</h3>
+                            <p class="text-muted">Enter your Username! </p>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" required="required" placeholder="Username" name="username">
+                        </div>
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    @Scripts.Render("~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar")
 </body>
 </html>

@@ -1,8 +1,10 @@
 ﻿$(document).ready(function () {
     $("select #RoomList").change(function () {
         getPreviousNumber();
+        getRoomPrice();
     });
     getPreviousNumber();
+    getRoomPrice();
 });
 
 getPreviousNumber = function () {
@@ -14,6 +16,29 @@ getPreviousNumber = function () {
         var result = callAjax(resource, RoomID, serviceID, list[i]);
     }
 };
+
+
+getRoomPrice = function () {
+    var ID = $("#RoomID option:selected").val();
+    
+    $.ajax({
+        url: "http://localhost:61368/Bills/GetRoomPrice",
+        data: {
+            RoomID: ID
+        },
+        success: function (result) {
+            if (result.success == true) {
+                $("#RoomPrice").val(result.data);
+            } else {
+                console.log(result.message);
+            }
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
+}
+
 
 callAjax = function (resource, roomID, serviceID, component) {
     $.ajax({
@@ -58,6 +83,7 @@ var calculateTotal = function (obj) {
     for (var i = 0; i < amountList.length; i++) {
         total += +$(amountList).eq(i).text();
     }
+    total += +$("#RoomPrice").val();
     $(".total").val(total);
 }
 
@@ -109,6 +135,29 @@ $("#bill-form").submit(function () {
         .appendTo('#bill-form');
 
 });
+
+//checkValid = function () {
+//    var returnValue = true;
+//    var error = {};
+//    var otherFee = +$("#OtherFee").val();
+//    if (otherFee < 0) {
+//        error.success = false;
+//        error.message = "Other fee cannot be negative";
+//        return error;
+//    }
+//    var amountList = $(".amount");
+//    var total = otherFee;
+//    for (var i = 0; i < amountList.length; i++) {
+//        var num = +$(amountList).eq(i).text();
+//        if (num < 0) {
+//            break;
+//        }
+//    }
+//    if (+$("#RoomPrice").val() < 0) {
+//        returnValue = false;
+//    }
+//    return returnValue;
+//}
 
 function beforeUpdateIsPaid(object) {
     var value = object.value;

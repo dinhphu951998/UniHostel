@@ -33,6 +33,28 @@ namespace UniHostel
                       "~/Scripts/alert/sweetalert2.css",
                       "~/url/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar/css").Include(
+                "~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar/bootstrap/dist/css/bootstrap.min.css",
+                "~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar/css/animate.css",
+                "~/Content/bootstrap-datepicker3.min.css",
+                "~/Content/bootstrap-datepicker.min.css",
+                "~/Scripts/alert/sweetalert2.css",
+                "~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar/css/style.css"
+                ));
+
+            bundles.Add(new ScriptBundle("~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar").Include(
+                "~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar/../plugins/bower_components/jquery/dist/jquery.min.js",
+                "~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar/bootstrap/dist/js/bootstrap.min.js",
+                "~/Scripts/DatePickerJQuery.js",
+                "~/Scripts/alert/sweetalert2.js",
+                "~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar/../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js",
+                "~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar/js/jquery.slimscroll.js",
+                "~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar/js/waves.js",
+                "~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar/js/custom.min.js",
+                "~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar/js/reset-password.js",
+                "~/Content/ampleadmin/ampleadmin-html/ampleadmin-sidebar/../plugins/bower_components/styleswitcher/jQuery.style.switcher.js"
+                ));
         }
     }
 }

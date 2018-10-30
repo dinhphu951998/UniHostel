@@ -92,4 +92,15 @@ E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Debug\UniHostel.csproj.CoreCompil
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Debug\UniHostel.csproj.CopyComplete
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Debug\UniHostel.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Debug\UniHostel.pdb
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\AutoMapper.dll
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\System.ValueTuple.dll
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\AutoMapper.pdb
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\AutoMapper.xml
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\System.ValueTuple.xml
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\BouncyCastle.Crypto.dll
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\MailKit.dll
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\MimeKit.dll
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\MailKit.xml
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\MimeKit.xml
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Debug\UniHostel.csprojAssemblyReference.cache
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Debug\UniHostel.csproj.ResolveComReference.cache

@@ -39,7 +39,6 @@ $(document).ready(function () {
 
         document.getElementById("table").tBodies[0].appendChild(row);
         $(".update-field").each(function (i, object) {
-            
             var content = object.getAttribute("data-content");
             var name = object.getAttribute("data-name");
             var input = document.createElement("input");
@@ -54,10 +53,32 @@ $(document).ready(function () {
             $(object).text("");
             $(object).append(input);
         });
+
         var submitButton = $("#submit-button");
         $(submitButton).attr("type", "submit");
         $("#footer").remove();
     });
+
+    var changRoomButton = $("#change-room-button");
+    changRoomButton.click(function () {
+        var form = $("#edit-form");
+        $(form).attr("action", "/Users/ChangeRoom");
+        var inputRoomID = document.createElement("input");
+        $(inputRoomID).attr("type", "text")
+            .attr("name", "RoomID")
+            .attr("class", "form-control")
+            .attr("value", "");
+        var row = createRow("RoomID", inputRoomID);
+
+        document.getElementById("table").tBodies[0].innerHTML = "";
+        document.getElementById("table").tBodies[0].appendChild(row);
+
+        var submitButton = $("#submit-button");
+        $(submitButton).attr("type", "submit");
+        $("#footer").remove();
+    });
+
+
 });
 
 var createRow = function (name, value) {

@@ -14,13 +14,12 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-
                     <div class=" col-md-9 col-lg-9 ">
                         @using (Html.BeginForm("EditRenter", "Users", FormMethod.Post, new { @id = "edit-form" }))
                         {
                             @Html.AntiForgeryToken()
-                        <input type="hidden" name="ID" value="@Model.ID" />
-                        <input type="hidden" name="RoomID" value="@Model.Renter.RoomID" />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <input type="hidden" name="ID" value="@Model.ID" />
                             <table class="table table-user-information" id="table">
                                 <tbody>
                                     <tr>
@@ -37,6 +36,7 @@
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => modelItem.Renter.Room.Name)
+                                            @Html.HiddenFor(model => model.Renter.RoomID)
                                         </td>
                                     </tr>
                                     <tr>
@@ -59,8 +59,10 @@
                                         <td>
                                             Date of birth:
                                         </td>
-                                        <td class="update-field" data-content="@Model.Renter.BirthDate.Value.ToShortDateString()" data-name="BirthDate" date-picker="date-picker">
-                                            @Html.Raw(Model.Renter.BirthDate.Value.ToShortDateString())
+                                        <td class="update-field" 
+                                            data-content="@(Model.Renter.BirthDate != null ? Model.Renter.BirthDate.Value.ToShortDateString(): "")"
+                                            data-name="BirthDate" date-picker="date-picker">
+                                            @Html.Raw(Model.Renter.BirthDate != null ? Model.Renter.BirthDate.Value.ToShortDateString() : null)
                                         </td>
                                     </tr>
 
@@ -84,17 +86,31 @@
                             <span class="pull-right">
                                 <input type="hidden" class="form-control" value="Save" id="submit-button" />
                             </span>
+
                         }
                     </div>
                 </div>
             </div>
+
             <div class="panel-footer" id="footer">
                 <a href="javascript:void(0)"
                    data-original-title="Edit this user"
                    data-toggle="tooltip" type="button"
                    id="edit-button"
-                   class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                   class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i>Edit</a>
+
+                <a href="javascript:void(0)"
+                   data-original-title="Change Room"
+                   data-toggle="tooltip" type="button"
+                   id="change-room-button"
+                   class="btn btn-sm btn-primary"><i class="fas fa-adjust"></i>Change Room</a>
+
+                <a href="@Url.Action("ChangePassword")"
+                   class="text-dark pull-right">
+                    <i class="fa fa-lock m-r-5"></i> Change password
+                </a>
             </div>
         </div>
 
     </div>
+</div>

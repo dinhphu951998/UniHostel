@@ -15,7 +15,7 @@
 <div class="form-horizontal">
     <h4>Bill</h4>
     <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })   
     <div class="form-group">
         @Html.LabelFor(model => model.RoomID, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -37,9 +37,17 @@
     @Html.Partial("AdvancedServiceTable", new BillAdvancedServiceDetail())
 
     <div class="form-group">
+        <label class="control-label col-md-2">Room Price</label>
+        <div class="col-md-10">
+            <input type="text" id="RoomPrice" value=""  class="form-control" readonly="readonly" min="0"/>
+        </div>
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(model => model.OtherFee, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.OtherFee, new { htmlAttributes = new { @class = "form-control", @onChange = "calculateTotal(this)" } })
+            @Html.EditorFor(model => model.OtherFee, new { htmlAttributes = new { @class = "form-control",
+           @onChange = "calculateTotal(this)", @id="OtherFee" } })
             @Html.ValidationMessageFor(model => model.OtherFee, "", new { @class = "text-danger" })
         </div>
     </div>

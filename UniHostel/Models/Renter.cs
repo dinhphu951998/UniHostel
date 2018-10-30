@@ -11,7 +11,7 @@ namespace UniHostel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Renter()
         {
-            Roommates = new HashSet<Roommate>();
+            Bills = new HashSet<Bill>();
         }
 
         [StringLength(255)]
@@ -47,11 +47,11 @@ namespace UniHostel.Models
         [StringLength(255)]
         public string RoomID { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bill> Bills { get; set; }
+
         public virtual Room Room { get; set; }
 
         public virtual User User { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Roommate> Roommates { get; set; }
     }
 }
