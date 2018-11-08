@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UniHostelDB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AdvancedService">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Single" Nullable="false" />
+    <Property Name="Unit" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="isActive" Type="Boolean" />
+    <Property Name="HostID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Host" Relationship="Self.FKAdvancedSe344659" FromRole="AdvancedServices" ToRole="Hosts" />
+    <NavigationProperty Name="BillAdvancedServiceDetails" Relationship="Self.FKBillAdvanc51478" FromRole="AdvancedServices" ToRole="BillAdvancedServiceDetails" />
+  </EntityType>
+  <EntityType Name="BillAdvancedServiceDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdvancedServiceID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BillID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Time" Type="DateTime" Precision="3" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AdvancedService" Relationship="Self.FKBillAdvanc51478" FromRole="BillAdvancedServiceDetails" ToRole="AdvancedServices" />
+    <NavigationProperty Name="Bill" Relationship="Self.FKBillAdvanc851367" FromRole="BillAdvancedServiceDetails" ToRole="Bills" />
+  </EntityType>
+  <EntityType Name="BillCompulsoryServiceDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BillID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CompulsoryServiceID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Time" Type="DateTime" Precision="3" />
+    <Property Name="PreNum" Type="Int32" Nullable="false" />
+    <Property Name="CurNum" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Single" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Bill" Relationship="Self.FKBillCompul345220" FromRole="BillCompulsoryServiceDetails" ToRole="Bills" />
+    <NavigationProperty Name="CompulsoryService" Relationship="Self.FKBillCompul352425" FromRole="BillCompulsoryServiceDetails" ToRole="CompulsoryServices" />
+  </EntityType>
+  <EntityType Name="Bill">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OtherFee" Type="Single" />
+    <Property Name="Total" Type="Single" Nullable="false" />
+    <Property Name="isPaid" Type="Boolean" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="RoomID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RenterID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="BillAdvancedServiceDetails" Relationship="Self.FKBillAdvanc851367" FromRole="Bills" ToRole="BillAdvancedServiceDetails" />
+    <NavigationProperty Name="BillCompulsoryServiceDetails" Relationship="Self.FKBillCompul345220" FromRole="Bills" ToRole="BillCompulsoryServiceDetails" />
+    <NavigationProperty Name="Room" Relationship="Self.FKBills118189" FromRole="Bills" ToRole="Rooms" />
+    <NavigationProperty Name="Renter" Relationship="Self.FKBills659531" FromRole="Bills" ToRole="Renters" />
+  </EntityType>
+  <EntityType Name="CompulsoryService">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Single" Nullable="false" />
+    <Property Name="Unit" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="isActive" Type="Boolean" />
+    <Property Name="HostID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="BillCompulsoryServiceDetails" Relationship="Self.FKBillCompul352425" FromRole="CompulsoryServices" ToRole="BillCompulsoryServiceDetails" />
+    <NavigationProperty Name="Host" Relationship="Self.FKCompulsory305640" FromRole="CompulsoryServices" ToRole="Hosts" />
+  </EntityType>
+  <EntityType Name="Host">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FullName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Mail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NumOfRoom" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="isActive" Type="Boolean" />
+    <NavigationProperty Name="AdvancedServices" Relationship="Self.FKAdvancedSe344659" FromRole="Hosts" ToRole="AdvancedServices" />
+    <NavigationProperty Name="CompulsoryServices" Relationship="Self.FKCompulsory305640" FromRole="Hosts" ToRole="CompulsoryServices" />
+    <NavigationProperty Name="User" Relationship="Self.FKHosts945312" FromRole="Hosts" ToRole="Users" />
+    <NavigationProperty Name="Rooms" Relationship="Self.FKRooms557241" FromRole="Hosts" ToRole="Rooms" />
+  </EntityType>
+  <EntityType Name="Renter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FullName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="BirthDate" Type="DateTime" Precision="0" />
+    <Property Name="Mail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="HomeTown" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="RoomID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Bills" Relationship="Self.FKBills659531" FromRole="Renters" ToRole="Bills" />
+    <NavigationProperty Name="Room" Relationship="Self.FKRenters242649" FromRole="Renters" ToRole="Rooms" />
+    <NavigationProperty Name="User" Relationship="Self.FKRenters392292" FromRole="Renters" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FKUsers38060" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Square" Type="Single" Nullable="false" />
+    <Property Name="Price" Type="Single" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="isAvailable" Type="Boolean" />
+    <Property Name="isActive" Type="Boolean" />
+    <Property Name="HostID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Bills" Relationship="Self.FKBills118189" FromRole="Rooms" ToRole="Bills" />
+    <NavigationProperty Name="Host" Relationship="Self.FKRooms557241" FromRole="Rooms" ToRole="Hosts" />
+    <NavigationProperty Name="Renters" Relationship="Self.FKRenters242649" FromRole="Rooms" ToRole="Renters" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isActive" Type="Boolean" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Host" Relationship="Self.FKHosts945312" FromRole="Users" ToRole="Hosts" />
+    <NavigationProperty Name="Renter" Relationship="Self.FKRenters392292" FromRole="Users" ToRole="Renters" />
+    <NavigationProperty Name="Role" Relationship="Self.FKUsers38060" FromRole="Users" ToRole="Roles" />
+  </EntityType>
+  <Association Name="FKAdvancedSe344659">
+    <End Role="Hosts" Type="Self.Host" Multiplicity="1" />
+    <End Role="AdvancedServices" Type="Self.AdvancedService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hosts">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AdvancedServices">
+        <PropertyRef Name="HostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKBillAdvanc51478">
+    <End Role="AdvancedServices" Type="Self.AdvancedService" Multiplicity="1" />
+    <End Role="BillAdvancedServiceDetails" Type="Self.BillAdvancedServiceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AdvancedServices">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BillAdvancedServiceDetails">
+        <PropertyRef Name="AdvancedServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKBillAdvanc851367">
+    <End Role="Bills" Type="Self.Bill" Multiplicity="1" />
+    <End Role="BillAdvancedServiceDetails" Type="Self.BillAdvancedServiceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bills">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BillAdvancedServiceDetails">
+        <PropertyRef Name="BillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKBillCompul345220">
+    <End Role="Bills" Type="Self.Bill" Multiplicity="1" />
+    <End Role="BillCompulsoryServiceDetails" Type="Self.BillCompulsoryServiceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bills">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BillCompulsoryServiceDetails">
+        <PropertyRef Name="BillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKBillCompul352425">
+    <End Role="CompulsoryServices" Type="Self.CompulsoryService" Multiplicity="1" />
+    <End Role="BillCompulsoryServiceDetails" Type="Self.BillCompulsoryServiceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompulsoryServices">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BillCompulsoryServiceDetails">
+        <PropertyRef Name="CompulsoryServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKBills118189">
+    <End Role="Rooms" Type="Self.Room" Multiplicity="1" />
+    <End Role="Bills" Type="Self.Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rooms">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bills">
+        <PropertyRef Name="RoomID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKBills659531">
+    <End Role="Renters" Type="Self.Renter" Multiplicity="1" />
+    <End Role="Bills" Type="Self.Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Renters">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bills">
+        <PropertyRef Name="RenterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKCompulsory305640">
+    <End Role="Hosts" Type="Self.Host" Multiplicity="1" />
+    <End Role="CompulsoryServices" Type="Self.CompulsoryService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hosts">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CompulsoryServices">
+        <PropertyRef Name="HostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKHosts945312">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Hosts" Type="Self.Host" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Hosts">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKRooms557241">
+    <End Role="Hosts" Type="Self.Host" Multiplicity="1" />
+    <End Role="Rooms" Type="Self.Room" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hosts">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Rooms">
+        <PropertyRef Name="HostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKRenters242649">
+    <End Role="Rooms" Type="Self.Room" Multiplicity="1" />
+    <End Role="Renters" Type="Self.Renter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rooms">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Renters">
+        <PropertyRef Name="RoomID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKRenters392292">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Renters" Type="Self.Renter" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Renters">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKUsers38060">
+    <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="UniHostelDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AdvancedServices" EntityType="Self.AdvancedService" />
+    <EntitySet Name="BillAdvancedServiceDetails" EntityType="Self.BillAdvancedServiceDetail" />
+    <EntitySet Name="BillCompulsoryServiceDetails" EntityType="Self.BillCompulsoryServiceDetail" />
+    <EntitySet Name="Bills" EntityType="Self.Bill" />
+    <EntitySet Name="CompulsoryServices" EntityType="Self.CompulsoryService" />
+    <EntitySet Name="Hosts" EntityType="Self.Host" />
+    <EntitySet Name="Renters" EntityType="Self.Renter" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Rooms" EntityType="Self.Room" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FKAdvancedSe344659" Association="Self.FKAdvancedSe344659">
+      <End Role="Hosts" EntitySet="Hosts" />
+      <End Role="AdvancedServices" EntitySet="AdvancedServices" />
+    </AssociationSet>
+    <AssociationSet Name="FKBillAdvanc51478" Association="Self.FKBillAdvanc51478">
+      <End Role="AdvancedServices" EntitySet="AdvancedServices" />
+      <End Role="BillAdvancedServiceDetails" EntitySet="BillAdvancedServiceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FKBillAdvanc851367" Association="Self.FKBillAdvanc851367">
+      <End Role="Bills" EntitySet="Bills" />
+      <End Role="BillAdvancedServiceDetails" EntitySet="BillAdvancedServiceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FKBillCompul345220" Association="Self.FKBillCompul345220">
+      <End Role="Bills" EntitySet="Bills" />
+      <End Role="BillCompulsoryServiceDetails" EntitySet="BillCompulsoryServiceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FKBillCompul352425" Association="Self.FKBillCompul352425">
+      <End Role="CompulsoryServices" EntitySet="CompulsoryServices" />
+      <End Role="BillCompulsoryServiceDetails" EntitySet="BillCompulsoryServiceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FKBills118189" Association="Self.FKBills118189">
+      <End Role="Rooms" EntitySet="Rooms" />
+      <End Role="Bills" EntitySet="Bills" />
+    </AssociationSet>
+    <AssociationSet Name="FKBills659531" Association="Self.FKBills659531">
+      <End Role="Renters" EntitySet="Renters" />
+      <End Role="Bills" EntitySet="Bills" />
+    </AssociationSet>
+    <AssociationSet Name="FKCompulsory305640" Association="Self.FKCompulsory305640">
+      <End Role="Hosts" EntitySet="Hosts" />
+      <End Role="CompulsoryServices" EntitySet="CompulsoryServices" />
+    </AssociationSet>
+    <AssociationSet Name="FKHosts945312" Association="Self.FKHosts945312">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Hosts" EntitySet="Hosts" />
+    </AssociationSet>
+    <AssociationSet Name="FKRooms557241" Association="Self.FKRooms557241">
+      <End Role="Hosts" EntitySet="Hosts" />
+      <End Role="Rooms" EntitySet="Rooms" />
+    </AssociationSet>
+    <AssociationSet Name="FKRenters242649" Association="Self.FKRenters242649">
+      <End Role="Rooms" EntitySet="Rooms" />
+      <End Role="Renters" EntitySet="Renters" />
+    </AssociationSet>
+    <AssociationSet Name="FKRenters392292" Association="Self.FKRenters392292">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Renters" EntitySet="Renters" />
+    </AssociationSet>
+    <AssociationSet Name="FKUsers38060" Association="Self.FKUsers38060">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

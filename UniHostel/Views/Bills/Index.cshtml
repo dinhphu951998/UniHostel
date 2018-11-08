@@ -47,7 +47,7 @@
             <tr style="background:@color">
                 <td scope="row">
                     <a href="@Url.Action("Details", new {ID = item.ID })">
-                        @Html.Raw(item.Room.Renters.OrderByDescending(r => r.StartDate).FirstOrDefault().FullName)
+                        @Html.Raw(item.Renter.FullName)
                     </a>
 
                 </td>

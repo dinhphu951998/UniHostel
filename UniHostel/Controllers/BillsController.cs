@@ -33,6 +33,7 @@ namespace UniHostel.Controllers
                 {
                     bills = db.Bills.Where(bill => bill.Room.HostID == user.ID);
                 }
+                bills = bills.OrderByDescending(b => b.Time);
                 return View(bills.ToList());
             }
             return RedirectToAction("Login", "Home");
@@ -69,10 +70,8 @@ namespace UniHostel.Controllers
         private void PrepairForCreatingBill(User user)
         {
             ViewBag.RenterID = new SelectList(db.Renters, "ID", "FullName");
-            List<Room> rooms = db.Rooms.Include(r => r.Host)
-                                       .Where(r => r.HostID == user.ID && r.Host.isActive == true
-                                            /*&& !r.Bills.Any(b => DateTime.Now.Month == b.Time.Month && DateTime.Now.Year == b.Time.Year)*/)
-                                       .ToList();
+            var rooms = db.Rooms.Where(r => r.HostID == user.ID && r.Host.isActive == true && r.isAvailable == false
+                                            && !r.Bills.Any(b => DateTime.Now.Month == b.Time.Month && DateTime.Now.Year == b.Time.Year));
             List<CompulsoryService> compulsoryServices = db.CompulsoryServices.Where(c => c.isActive == true)
                                                                               .ToList();
             List<AdvancedService> advancedServices = db.AdvancedServices.Where(a => a.isActive == true)
@@ -84,7 +83,7 @@ namespace UniHostel.Controllers
                 Text = r.Name + " - " + r.Renters.Where(renter => renter.RoomID == r.ID
                                                        && renter.EndDate == null)
                                                .Select(renter => renter.FullName)
-                                               .First(),
+                                               .FirstOrDefault(),
                 Value = r.ID
             });
         }
@@ -131,7 +130,8 @@ namespace UniHostel.Controllers
                 PrepairForCreatingBill(user);
                 var roomID = ModelState["RoomID"].Value.AttemptedValue as string;
                 var renterID = db.Rooms.Find(roomID).Renters.OrderByDescending(renter => renter.StartDate).FirstOrDefault().ID;
-                ModelState["RenterID"].Errors.Clear();
+                if (ModelState["RenterID"] != null)
+                    ModelState["RenterID"].Errors.Clear();
                 bill.RenterID = renterID;
                 if (ModelState.IsValid)
                 {
@@ -291,7 +291,6 @@ namespace UniHostel.Controllers
             {
                 filename = GetExcelFile(id, user);
                 ProcessFile(filename);
-                return RedirectToAction("Index");
             }
             return RedirectToAction("Login", "Home");
         }
@@ -477,7 +476,7 @@ namespace UniHostel.Controllers
 
                     Range CellRange = ws.Range[ws.Cells[1, 1], ws.Cells[i, 6]];
                     CellRange.BorderAround(XlLineStyle.xlContinuous, XlBorderWeight.xlMedium);
-                    
+
                     ws.Cells.Style.HorizontalAlignment = XlHAlign.xlHAlignCenter;
 
                     ws.Columns.AutoFit();

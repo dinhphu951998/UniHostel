@@ -43,9 +43,6 @@ namespace UniHostel.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
-            ViewBag.ID = new SelectList(db.Hosts, "ID", "FullName");
-            ViewBag.ID = new SelectList(db.Renters, "ID", "FullName");
-            ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName");
             return View();
         }
 
@@ -69,7 +66,21 @@ namespace UniHostel.Controllers
                 user.Host = host;
                 db.Users.Add(user);
                 db.SaveChanges();
-
+                for (int i = 0; i < host.NumOfRoom; i++)
+                {
+                    var newRoom = new Room()
+                    {
+                        HostID = user.ID,
+                        Name = (i + 1).ToString(),
+                        Price = 1,
+                        Square = 1,
+                        ID = Utils.getRandomID(),
+                        isActive = true,
+                        isAvailable = true
+                    };
+                    db.Rooms.Add(newRoom);
+                }
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(user);

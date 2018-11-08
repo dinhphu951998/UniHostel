@@ -68,6 +68,15 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices" />
@@ -180,23 +189,60 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HostsController.cs" />
     <Compile Include="Controllers\RentersController.cs" />
+    <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="ExtensionMethod\MyAutoMapper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AdvancedService.cs" />
-    <Compile Include="Models\Bill.cs" />
-    <Compile Include="Models\BillAdvancedServiceDetail.cs" />
-    <Compile Include="Models\BillCompulsoryServiceDetail.cs" />
-    <Compile Include="Models\CompulsoryService.cs" />
-    <Compile Include="Models\Host.cs" />
-    <Compile Include="Models\Renter.cs" />
-    <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\Room.cs" />
-    <Compile Include="Models\sysdiagram.cs" />
-    <Compile Include="Models\UniHostelDB.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\AdvancedService.cs">
+      <DependentUpon>UniHostelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Bill.cs">
+      <DependentUpon>UniHostelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BillAdvancedServiceDetail.cs">
+      <DependentUpon>UniHostelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BillCompulsoryServiceDetail.cs">
+      <DependentUpon>UniHostelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompulsoryService.cs">
+      <DependentUpon>UniHostelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Host.cs">
+      <DependentUpon>UniHostelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Renter.cs">
+      <DependentUpon>UniHostelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>UniHostelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Room.cs">
+      <DependentUpon>UniHostelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>UniHostelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UniHostelDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UniHostelDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UniHostelDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UniHostelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UniHostelDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UniHostelDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>UniHostelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserRenterViewModel.cs" />
     <Compile Include="Models\Utils.cs" />
     <Compile Include="Models\ViewModel\ChangePasswordViewModel.cs" />
@@ -204,6 +250,7 @@
     <Compile Include="ExtensionMethod\DataExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\1.css" />
     <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\bootstrap\dist\css\bootstrap.min.css" />
     <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\bootstrap\dist\js\bootstrap.min.js" />
@@ -263,6 +310,13 @@
     <Content Include="Content\bill\bootstrap.min.js" />
     <Content Include="Content\bill\jquery-3.2.1.slim.min.js" />
     <Content Include="Content\bill\popper.min.js" />
+    <Content Include="Content\css1\jquery-ui-1.10.3.custom.css" />
+    <Content Include="Content\css1\jquery.bxslider.css" />
+    <Content Include="Content\css1\responsive-menu.css" />
+    <Content Include="Content\css1\responsive.css" />
+    <Content Include="Content\css1\style.css" />
+    <Content Include="Content\cssdelete\bootstrap.css" />
+    <Content Include="Content\cssdelete\site.css" />
     <Content Include="Content\custom-login.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -279,7 +333,14 @@
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.structure.css" />
     <Content Include="Content\jquery-ui.theme.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\sb-admin.css" />
+    <Content Include="Content\search.css" />
+    <Content Include="Content\styles\color.css" />
+    <Content Include="Content\styles\css.css" />
+    <Content Include="Content\styles\font-awesome.css" />
+    <Content Include="Content\styles\layout.css" />
+    <Content Include="Content\styles\style.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -326,6 +387,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\UniHostelDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UniHostelDB.edmx</DependentUpon>
+      <LastGenOutput>UniHostelDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\UniHostelDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UniHostelDB.edmx</DependentUpon>
+      <LastGenOutput>UniHostelDB.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\alert\sweetalert2.common.js" />
     <Content Include="Scripts\alert\sweetalert2.css" />
     <Content Include="Scripts\alert\sweetalert2.js" />
@@ -406,7 +477,15 @@
     <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\weather-icons\fonts\weathericons-regular-webfont.woff" />
     <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\weather-icons\fonts\weathericons-regular-webfont.woff2" />
     <Content Include="Content\ampleadmin\ampleadmin-html\ampleadmin-sidebar\css\icons\weather-icons\fonts\weathericons-regular-webfontd41d.eot" />
+    <EntityDeploy Include="Models\UniHostelDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UniHostelDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\UniHostelDB.edmx.diagram">
+      <DependentUpon>UniHostelDB.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -416,12 +495,21 @@
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.bxslider.min.js" />
     <Content Include="Scripts\jquery.easing.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js1\classie.js" />
+    <Content Include="Scripts\js1\home.js" />
+    <Content Include="Scripts\js1\jquery-1.9.1.js" />
+    <Content Include="Scripts\js1\jquery-ui-1.10.3.js" />
+    <Content Include="Scripts\js1\jquery.bxslider.min.js" />
+    <Content Include="Scripts\js1\mlpushmenu.js" />
+    <Content Include="Scripts\js1\modernizr.custom.js" />
+    <Content Include="Scripts\js1\script.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker-en-CA.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.ar-tn.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.ar.min.js" />
@@ -506,11 +594,18 @@
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\CustomJavascript.js" />
+    <Content Include="Scripts\PaypalPayment.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\DatePickerJQuery.js" />
+    <Content Include="Scripts\room-detail.js" />
     <Content Include="Scripts\userpage.js" />
     <None Include="Views\Home\MailHtmlMessage.cshtml" />
     <Content Include="Views\Users\ChangePassword.cshtml" />
+    <Content Include="Views\Rooms\Delete.cshtml" />
+    <Content Include="Views\Rooms\Index.cshtml" />
+    <Content Include="Views\Rooms\RoomDetails.cshtml" />
+    <Content Include="Views\Rooms\RoomManager.cshtml" />
+    <Content Include="Views\Rooms\RoomUpdate.cshtml" />
     <None Include="Views\Shared\400.cshtml" />
     <None Include="Views\Shared\403.cshtml" />
     <None Include="Views\Shared\404.cshtml" />
@@ -576,6 +671,7 @@
     <Content Include="Views\Users\RenterDetails.cshtml" />
     <Content Include="Views\Home\Signup.cshtml" />
     <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\Shared\_NiceLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

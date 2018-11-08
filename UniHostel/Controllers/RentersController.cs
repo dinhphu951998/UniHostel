@@ -41,36 +41,6 @@ namespace UniHostel.Controllers
             return View(renter);
         }
 
-        // GET: Renters/Create
-        //public ActionResult Create()
-        //{
-        //    if(Session["User"] is User user)
-        //    {
-        //        var availableRooms = db.Rooms.Where(room => room.HostID == user.ID && room.isAvailable == true);
-        //        ViewBag.RoomID = new SelectList(availableRooms.ToList(), "ID", "Name");
-        //        ViewBag.ID = Utils.getRandomID();
-        //        return View();
-        //    }
-        //    return RedirectToAction("Login", "Home");
-        //}
-
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "ID,FullName,StartDate,EndDate,BirthDate,Mail,HomeTown,Phone,Description,RoomID")] Renter renter)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Renters.Add(renter);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    ViewBag.RoomID = new SelectList(db.Rooms, "ID", "Name", renter.RoomID);
-        //    ViewBag.ID = new SelectList(db.Users, "ID", "Username", renter.ID);
-        //    return View(renter);
-        //}
-
         // GET: Renters/Edit/5
         public ActionResult Edit(string id)
         {

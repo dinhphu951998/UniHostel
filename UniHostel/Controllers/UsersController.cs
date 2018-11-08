@@ -62,8 +62,6 @@ namespace UniHostel.Controllers
                 entry.Property(r => r.Phone).IsModified = true;
                 entry.Property(r => r.Mail).IsModified = true;
                 entry.Property(r => r.HomeTown).IsModified = true;
-                entry.Property(r => r.HomeTown).IsModified = true;
-                entry.Property(r => r.RoomID).IsModified = true;
                 db.SaveChanges();
                 return RedirectToAction("Details");
             }
@@ -83,8 +81,9 @@ namespace UniHostel.Controllers
             {
                 if (CheckRoomIDIsAvailable(roomID) == 1)
                 {
-                    user.Renter.RoomID = roomID;
-                    user.Renter.EndDate = null;
+                    var renter = db.Renters.Find(user.ID);
+                    renter.RoomID = roomID;
+                    renter.EndDate = null;
                     var room = db.Rooms.Find(roomID);
                     room.isAvailable = false;
                     db.SaveChanges();

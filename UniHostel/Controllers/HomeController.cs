@@ -20,7 +20,7 @@ namespace UniHostel.Controllers
             User user = Session["User"] as User;
             if (user != null)
             {
-                return RedirectToRoute("Login", new { username = user.Username, password = user.Password });
+                return Login(user.Username, user.Password);
             }
             return View();
         }
@@ -42,7 +42,7 @@ namespace UniHostel.Controllers
                         case 1: //Admin
                             return RedirectToAction("Index", "Admin");
                         case 2: // Host
-                            return RedirectToAction("Index", "Renters");
+                            return RedirectToAction("Index", "Rooms");
                         case 3:// Renter
                             return RedirectToAction("Index", "Bills");
                     }
@@ -112,13 +112,14 @@ namespace UniHostel.Controllers
                     room.isAvailable = false;
 
                     _db.SaveChanges();
+
                 }
                 catch (Exception e)
                 {
                     ModelState.AddModelError(string.Empty, e.Message);
                     return View(model);
                 }
-                return RedirectToAction("Login", new { username = user.Username, password = user.Password });
+                return Login(user.Username, user.Password);
             }
             return View(model);
         }

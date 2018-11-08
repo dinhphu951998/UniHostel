@@ -146,6 +146,13 @@
         </div>
 
 
+        <dt>
+            @Html.Raw("Room Price")
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Room.Price.ToString("N0"))
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.OtherFee)
@@ -205,6 +212,60 @@
         </a>
         <label> | </label>
     }
+    else
+    {
+        <div id="paypal-button-container"></div>
+        <script>
+            paypal.Button.render({
+                env: 'sandbox',
+
+                style: {
+                    layout: 'vertical',
+                    size: 'medium',
+                    shape: 'rect',
+                    color: 'gold'
+                },
+
+                funding: {
+                    allowed: [
+                        paypal.FUNDING.CARD,
+                        paypal.FUNDING.CREDIT
+                    ],
+                    disallowed: []
+                },
+
+                // PayPal Client IDs - replace with your own
+                // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+                client: {
+                    sandbox: 'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
+                    production: '<insert production client id>'
+                },
+
+                payment: function (data, actions) {
+                    return actions.payment.create({
+                        payment: {
+                            transactions: [
+                                {
+                                    amount: {
+                                        total: '@Model.Total',
+                                        currency: 'VND'
+                                    }
+                                }
+                            ]
+                        }
+                    });
+                },
+
+                onAuthorize: function (data, actions) {
+                    return actions.payment.execute()
+                        .then(function () {
+                            window.alert('Payment Complete!');
+                        });
+                }
+            }, '#paypal-button-container');
+        </script>
+    }
+
     <a href="@Url.Action("Index")">
         <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to List
     </a>

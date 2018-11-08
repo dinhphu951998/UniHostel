@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $("select #RoomList").change(function () {
+    $("#RoomID").change(function () {
         getPreviousNumber();
         getRoomPrice();
     });

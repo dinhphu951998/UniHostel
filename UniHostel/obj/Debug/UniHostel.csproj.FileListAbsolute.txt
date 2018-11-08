@@ -102,5 +102,9 @@ E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\MailKit.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\MimeKit.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\MailKit.xml
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\MimeKit.xml
-E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Debug\UniHostel.csprojAssemblyReference.cache
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Debug\UniHostel.csproj.ResolveComReference.cache
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\PagedList.dll
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\PagedList.Mvc.dll
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\PagedList.xml
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\PagedList.Mvc.xml
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Debug\UniHostel.csprojAssemblyReference.cache
