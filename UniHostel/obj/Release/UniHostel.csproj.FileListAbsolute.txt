@@ -99,3 +99,15 @@ E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Release\UniHostel.csproj.CoreComp
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Release\UniHostel.csproj.CopyComplete
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Release\UniHostel.dll
 E:\FPTU\PRN292\Project\UniHostel\UniHostel\obj\Release\UniHostel.pdb
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.AI.DependencyCollector.dll
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.AI.Web.dll
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.AI.WindowsServer.dll
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.ApplicationInsights.dll
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.AI.DependencyCollector.xml
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.AI.PerfCounterCollector.xml
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.AI.Web.xml
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.AI.WindowsServer.xml
+E:\FPTU\PRN292\Project\UniHostel\UniHostel\bin\Microsoft.ApplicationInsights.xml
