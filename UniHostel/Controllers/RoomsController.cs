@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -16,25 +16,18 @@ namespace Hostel1.Controllers
     {
         private UniHostelDB db = new UniHostelDB();
 
-        // GET: Rooms
         public ActionResult Index()
         {
-            var user = Session["User"] as User;
-            if(user != null)
-            {
-                var books = from b in db.Rooms where b.HostID == user.ID select b;
-                return View(books.ToList());
-            }
-            return RedirectToAction("Login", "Home");
+            return View();
         }
 
 
-        public ActionResult RoomManager(String SortPrice,String search, int page = 1)
+        public ActionResult RoomManager(String SortPrice, String search, int page = 1)
         {
             var user = Session["User"] as User;
             if (user != null)
             {
-                List<Room> room = db.Rooms.Where(r => r.HostID == user.ID).ToList();
+                List<Room> room = db.Rooms.Where(r => r.HostID == user.ID && r.isActive == true).ToList();
                 switch (SortPrice)
                 {
                     case "Sxtd":
@@ -51,7 +44,7 @@ namespace Hostel1.Controllers
                 ViewBag.searchName = search;
                 return View(room.ToList().ToPagedList(page, 3));
             }
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Rooms");
         }
 
 
@@ -78,7 +71,7 @@ namespace Hostel1.Controllers
 
         [HttpPost, ValidateInput(false)]
         public ActionResult RoomUpdate(
-            [Bind(Include = "ID,Name,Square,Price,Description,IsAvailable,Image")] Room room, 
+            [Bind(Include = "ID,Name,Square,Price,Description,IsAvailable,Image")] Room room,
             HttpPostedFileBase banner)
         {
             try
@@ -87,14 +80,14 @@ namespace Hostel1.Controllers
                 {
                     string extentionName = System.IO.Path.GetExtension(banner.FileName);
                     string finalFileName = DateTime.Now.Ticks.ToString() + extentionName;
-                    string path = System.IO.Path.Combine(Server.MapPath("~/asset/RoomImage"), finalFileName);
-                    DirectoryInfo fileInfo = new DirectoryInfo(Server.MapPath("~/asset/RoomImage"));
+                    string path = System.IO.Path.Combine(Server.MapPath("~/asset/imgRoommanager"), finalFileName);
+                    DirectoryInfo fileInfo = new DirectoryInfo(Server.MapPath("~/asset/imgRoommanager"));
                     if (!fileInfo.Exists)
                     {
-                        Directory.CreateDirectory(Server.MapPath("~/asset/RoomImage"));
+                        Directory.CreateDirectory(Server.MapPath("~/asset/imgRoommanager"));
                     }
                     banner.SaveAs(path);
-                    string imgSrc = $"/asset/RoomImage/{finalFileName}";
+                    string imgSrc = $"/asset/imgRoommanager/{finalFileName}";
                     room.Image = imgSrc;
                 }
                 var oldRoom = db.Rooms.Find(room.ID);
@@ -104,7 +97,7 @@ namespace Hostel1.Controllers
                 oldRoom.Price = room.Price;
                 db.SaveChanges();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ModelState.AddModelError(string.Empty, e.Message);
                 return View(room);

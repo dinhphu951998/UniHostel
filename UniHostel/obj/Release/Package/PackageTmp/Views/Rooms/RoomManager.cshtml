@@ -1,0 +1,305 @@
+﻿@using PagedList; 
+@using PagedList.Mvc;
+@model PagedList.IPagedList<UniHostel.Models.Room>
+
+@{
+    Layout = "~/Views/Shared/_NiceLayout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/search.css">
+<link rel="stylesheet" type="text/css" href="~/Content/styles/color.css">
+<link rel="stylesheet" type="text/css" href="~/Content/styles/layout.css">
+<link rel="stylesheet" type="text/css" href="~/Content/styles/style.css">
+<link rel="stylesheet" type="text/css" href="~/Content/styles/css.css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<!-- PRELOADER -->
+<div id="preloader">
+    <span class="loader" data-loading-text="loading">
+    </span>
+</div>
+<!-- END / PRELOADER -->
+<div class="md-hotel">
+    <div id="mp-pusher" class="mp-pusher">
+        <!-- Header -->
+        <!-- Body -->
+        <form action="" method="post">
+            <div class="box">
+                <div class="container-4" style="float:right;margin-top:50px;margin-right:280px;">
+                    <input type="search" name="search" id="search" placeholder="Searching" value="@ViewBag.searchName" />
+                    <button class="icon"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+        <form action="" method="post">
+            <select name="SortPrice" id="form-select" class="form-select" style="margin-top:51px;margin-right:40px;float:right;font-family: 'Open Sans';font-size:16px;padding: 8px 40px 8px 14px;height:50px;width:200px;border-radius: 5px;">
+                <option class="option-test">Sắp Xếp</option>
+                <option value="Sxtd">Sắp Xếp Tăng Dần</option>
+                <option value="Sxgd">Sắp Xếp Giảm Dần</option>
+            </select>
+            <button style="margin-left:600px;margin-top:55px;" class="btn btn-info" type="submit">Submit</button>
+        </form>
+
+
+        <div class="md-body-wrapper">
+            <section class="container">
+                <div class="md-body md-accomodation">
+                    <section class="row md-accomodation-available clearfix">
+                        <div class="grid_3 align-center">
+                            <header class="box-heading heading-large">
+                                H
+                                <div class="decription-override">
+                                    <h2 class="h1">Uni Hostel</h2>
+                                    <p>Thiên đường cho mọi nhà</p>
+                                </div>
+                            </header>
+                        </div>
+                        <div class="grid_9">
+                            <section class="md-booking">
+                                <h2 class="title-checkroom">Check availability</h2>
+                                <div class="box-booking booking-inline">
+                                    <form>
+                                        <div class="form-group">
+                                            <label class="label-control">Arrival Date</label>
+                                            <div class="booking-form select-black">
+                                                <label class="collapse input">
+                                                    <input type="text" id="arrival-date" class="input-control border-black" />
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="label-control">Departure Date</label>
+                                            <div class="booking-form select-black">
+                                                <label class="collapse input">
+                                                    <input type="text" id="departure-date" class="input-control border-black" />
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group select">
+                                            <label class="label-control">Adults</label>
+                                            <div class="input-group select-black">
+                                                <label class="collapse">
+                                                    <select class="form-select">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group select">
+                                            <label class="label-control">Children</label>
+                                            <div class="input-group select-black">
+                                                <label class="collapse">
+                                                    <select class="form-select">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group last">
+                                            <label class="label-control"></label>
+                                            <a href="#" class="btn btn-large btn-darkbrown">Check</a>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.box-booking
+                                </section><!-- /.md-booking -->
+                        </div>
+                    </section>
+
+
+                    <section class="md-accomodation-content">
+                        <div class="row clearfix">
+                            @foreach (var room in Model)
+                            {
+                                <div class="grid_4">
+                                    <article class="media">
+                                        <div class="card">
+                                            <img class="card-img-top" src="@room.Image" alt="Card image cap">
+                                            <div class="card-body">
+                                                <h5 class="card-title" style="margin-top: 10px;"><i class="fas fa-home"></i>  @room.Name</h5>
+                                                <p class="price" style="margin-top:-10px;"><i class="fas fa-dollar-sign"></i>  @room.Price.ToString("N0") đ/tháng</p>
+                                                <p class="card-text" style="margin-top:-15px;">
+                                                    @Html.Raw(room.Description)
+                                                </p>
+                                                <p class="area"><i class="fas fa-square"></i>Diện tích: @room.Square m² </p>
+                                                <a class="btn btn-small btn-border btn-border-brown" href="RoomDetails">See Detail</a>
+                                                <a class="btn btn-small btn-border btn-border-brown" href="RoomUpdate/@room.ID">Update</a>
+                                                <a class="btn btn-small btn-border btn-border-brown" href="Delete/@room.ID">Delete </a>
+
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            }
+
+
+                        </div>
+                        <div class="page" style="margin-left:-10px;">
+                            @Html.PagedListPager(Model, s => Url.Action("RoomManager", new { page = s }))
+                        </div>
+                    </section>
+                </div><!-- /.md-accomodation -->
+            </section><!-- /.md-wrapper  -->
+        </div>
+
+
+
+    </div><!--/.mp-pusher -->
+</div>
+
+
+
+<div id="bodychild">
+    <div id="outercontainer">
+        <!-- MAIN CONTENT -->
+        <div id="outermain">
+            <section id="maincontent">
+                <section id="content">
+                    <div class="custom3 noborderbottom">
+                        <div class="container">
+                            <div class="row">
+                                <div class="twelve columns">
+                                    <!-- runing text -->
+                                    <div class="ts-features-widget-wrapper textcenter">
+                                        <h3 class="widget-title">Room Facilities</h3>
+
+                                        <div class="ts-features">
+                                            <div class="row">
+                                                <div class="columns fitem two">
+                                                    <div class="item-container">
+                                                        <div class="feature-icon">
+                                                            <i class="fas fa-desktop fa-3x"></i>
+                                                        </div>
+
+                                                        <div class="feature-wrap">
+                                                            <h3 class="feature-title">Computer</h3>
+                                                            <div class="feature-text">
+                                                                Praesent vestibulum moe lacus. Aenean nonummy
+                                                                hendrerit mauris.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="columns fitem two">
+                                                    <div class="item-container">
+                                                        <div class="feature-icon">
+                                                            <i class="fas fa-music fa-3x"></i>
+                                                        </div>
+
+                                                        <div class="feature-wrap">
+                                                            <h3 class="feature-title">Music</h3>
+                                                            <div class="feature-text">
+                                                                Praesent vestibulum moe lacus. Aenean nonummy
+                                                                hendrerit mauris.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="columns fitem two">
+                                                    <div class="item-container">
+                                                        <div class="feature-icon">
+                                                            <i class="fas fa-gamepad fa-3x"></i>
+                                                        </div>
+
+                                                        <div class="feature-wrap">
+                                                            <h3 class="feature-title">Games</h3>
+                                                            <div class="feature-text">
+                                                                Praesent vestibulum moe lacus. Aenean nonummy
+                                                                hendrerit mauris.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="columns fitem two">
+                                                    <div class="item-container">
+                                                        <div class="feature-icon">
+                                                            <i class="fas fa-utensils fa-3x"></i>
+                                                        </div>
+
+                                                        <div class="feature-wrap">
+                                                            <h3 class="feature-title">Tools</h3>
+
+                                                            <div class="feature-text">
+                                                                Praesent vestibulum moe lacus. Aenean nonummy
+                                                                hendrerit mauris.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="columns fitem two">
+                                                    <div class="item-container">
+                                                        <div class="feature-icon">
+                                                            <i class="fas fa-wifi fa-3x"></i>
+                                                        </div>
+
+                                                        <div class="feature-wrap">
+                                                            <h3 class="feature-title color2">Internet</h3>
+
+                                                            <div class="feature-text">
+                                                                Praesent vestibulum moe lacus. Aenean nonummy
+                                                                hendrerit mauris.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="columns fitem two">
+                                                    <div class="item-container">
+                                                        <div class="feature-icon">
+                                                            @*<i class="fa fa-glass color2"></i>*@
+                                                            <i class="fas fa-wine-glass fa-3x"></i>
+                                                        </div>
+
+                                                        <div class="feature-wrap">
+                                                            <h3 class="feature-title">Wine</h3>
+
+                                                            <div class="feature-text">
+                                                                Praesent vestibulum moe lacus. Aenean nonummy
+                                                                hendrerit mauris.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="clear"></div>
+                                        </div>
+
+                                        <div class="clear"></div>
+                                    </div>
+                                    <!-- end runing text -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="custom4 textcenter">
+                        <div class="container">
+                            <div class="row">
+                                <div class="twelve columns">
+                                    Our reservation system handled by external booking system with high security to make your data safe.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            </section>
+        </div>
+        <!-- END MAIN CONTENT -->
+        <div class="clear"></div><!-- clear float -->
+    </div><!-- end outercontainer -->
+</div><!-- end bodychild -->

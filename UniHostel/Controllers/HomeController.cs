@@ -20,18 +20,24 @@ namespace UniHostel.Controllers
             User user = Session["User"] as User;
             if (user != null)
             {
-                return Login(user.Username, user.Password);
+                return Login(user.Username, user.Password, true);
             }
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(string username, string password)
+        public ActionResult Login(string username, string password, bool isForward = false)
         {
             try
             {
+
+                string encryptPassword = password;
+                if (!isForward)
+                {
+                    encryptPassword = password.ComputeSha256Hash();
+                }
                 User user = _db.Users.First<User>(u => u.Username == username
-                                                            && u.Password == password
+                                                            && u.Password == encryptPassword
                                                             && u.isActive == true);
                 if (user != null)
                 {
@@ -96,7 +102,7 @@ namespace UniHostel.Controllers
                         ModelState.AddModelError("RoomID", "This RoomID is not available");
                         return View(model);
                     }
-                    string userID = Utils.getRandomID();
+                    string userID = Utils.getRandomID(10);
                     user.ID = userID;
                     var roleRenterID = _db.Roles.Single(r => r.RoleName == "Renter").RoleID;
                     user.RoleID = roleRenterID;
@@ -119,7 +125,7 @@ namespace UniHostel.Controllers
                     ModelState.AddModelError(string.Empty, e.Message);
                     return View(model);
                 }
-                return Login(user.Username, user.Password);
+                return Login(user.Username, user.Password, true);
             }
             return View(model);
         }
@@ -215,7 +221,7 @@ namespace UniHostel.Controllers
             var user = _db.Users.Find(ID);
             try
             {
-                user.Password = password;
+                user.Password = password.ComputeSha256Hash();
                 _db.SaveChanges();
             }catch(Exception ex)
             {

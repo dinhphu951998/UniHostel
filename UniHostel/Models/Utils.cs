@@ -10,10 +10,24 @@ namespace UniHostel.Models
 {
     public class Utils
     {
+        private static Random random = new Random();
 
-        public static string getRandomID()
+        private const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        public static string getRandomID(int length)
         {
-            return DateTime.Now.ToString("yyyyMMddHHmmssffff");
+            return DateTime.Now.ToString("yyMMddHHmmssffff") + GetGeneratedCode(length);
+        }
+
+        public static string GetGeneratedCode(int length)
+        {
+            var strLen = chars.Length;
+            var code = "";
+            for (var i = 0; i < length; i++)
+            {
+                code += chars[random.Next(strLen)];
+            }
+            return code;
         }
 
         public static void SendingMailUsingMailKit(string contentMail, string email)

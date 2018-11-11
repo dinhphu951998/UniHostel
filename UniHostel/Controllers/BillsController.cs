@@ -19,7 +19,6 @@ namespace UniHostel.Controllers
     {
         private UniHostelDB db = new UniHostelDB();
 
-        // GET: Bills
         public ActionResult Index()
         {
             if (Session["User"] is User user)
@@ -36,11 +35,10 @@ namespace UniHostel.Controllers
                 bills = bills.OrderByDescending(b => b.Time);
                 return View(bills.ToList());
             }
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Rooms");
 
         }
 
-        // GET: Bills/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -55,7 +53,6 @@ namespace UniHostel.Controllers
             return View(bill);
         }
 
-        // GET: Bills/Create
         public ActionResult Create()
         {
             if (Session["User"] is User user)
@@ -64,7 +61,7 @@ namespace UniHostel.Controllers
                 var Bill = new Bill();
                 return View(Bill);
             }
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Rooms");
         }
 
         private void PrepairForCreatingBill(User user)
@@ -135,7 +132,7 @@ namespace UniHostel.Controllers
                 bill.RenterID = renterID;
                 if (ModelState.IsValid)
                 {
-                    string billID = Utils.getRandomID();
+                    string billID = Utils.getRandomID(10);
                     bill.ID = billID;
                     bill.isPaid = false;
                     bill.Time = DateTime.Now;
@@ -146,12 +143,13 @@ namespace UniHostel.Controllers
                             ModelState.AddModelError(string.Empty, "Previous number cannot less than current number");
                             return View(bill);
                         }
-                        details.BillID = billID;
+                        //details.BillID = billID;
                     }
-                    foreach (var details in advancedServiceDetailList)
-                    {
-                        details.BillID = billID;
-                    }
+
+                    //foreach (var details in advancedServiceDetailList)
+                    //{
+                    //    details.BillID = billID;
+                    //}
                     bill.BillCompulsoryServiceDetails = compulsoryServiceDetailList;
                     bill.BillAdvancedServiceDetails = advancedServiceDetailList;
                     db.Bills.Add(bill);
@@ -165,10 +163,9 @@ namespace UniHostel.Controllers
 
                 return View(bill);
             }
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Rooms");
         }
 
-        // GET: Bills/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -183,7 +180,6 @@ namespace UniHostel.Controllers
             return View(bill);
         }
 
-        // POST: Bills/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Time,OtherFee,Total,isPaid,Description,RoomID")] Bill newBill,
@@ -247,7 +243,6 @@ namespace UniHostel.Controllers
             return Json(new { success = false, message = "Cannot find room with ID " + RoomID }, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Bills/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -262,7 +257,6 @@ namespace UniHostel.Controllers
             return View(bill);
         }
 
-        // POST: Bills/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
@@ -282,7 +276,6 @@ namespace UniHostel.Controllers
             }
         }
 
-        //Bills/ExportExcel
         public ActionResult ExportExcel(string id)
         {
             User user = Session["User"] as User;
@@ -292,7 +285,7 @@ namespace UniHostel.Controllers
                 filename = GetExcelFile(id, user);
                 ProcessFile(filename);
             }
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Rooms");
         }
 
         private void ProcessFile(string filename)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using UniHostel.ExtensionMethod;
 using UniHostel.Models;
 
 namespace UniHostel.Controllers
@@ -46,13 +48,12 @@ namespace UniHostel.Controllers
             return View();
         }
 
-        // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(User user, Host host)
         {
-            user.ID = Utils.getRandomID();
-            user.RoleID = 2;
+            user.ID = Utils.getRandomID(10);
+            user.RoleID = int.Parse(ConfigurationManager.AppSettings["HOST"].ToString());
             var userInDb = db.Users.Where(u => u.Username == user.Username);
             if (userInDb.Count() != 0)
             {
@@ -64,29 +65,38 @@ namespace UniHostel.Controllers
                 user.isActive = true;
                 host.isActive = true;
                 user.Host = host;
+                string encryptPassword = user.Password.ComputeSha256Hash();
+                user.Password = encryptPassword;
                 db.Users.Add(user);
-                db.SaveChanges();
+
                 for (int i = 0; i < host.NumOfRoom; i++)
                 {
+                    Room tmp = null;
+                    string id;
+                    do
+                    {
+                        id = Utils.getRandomID(2);
+                        tmp = db.Rooms.Find(id);
+                    } while (tmp != null);
                     var newRoom = new Room()
                     {
-                        HostID = user.ID,
                         Name = (i + 1).ToString(),
                         Price = 1,
                         Square = 1,
-                        ID = Utils.getRandomID(),
+                        ID = id,
                         isActive = true,
                         isAvailable = true
                     };
-                    db.Rooms.Add(newRoom);
+                    host.Rooms.Add(newRoom);
                 }
+
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(user);
         }
 
-        // GET: Users/Edit/5
         public ActionResult Edit(string id)
         {
             var usertest = db.Users.Find(id);
@@ -115,7 +125,6 @@ namespace UniHostel.Controllers
             return View(host);
         }
 
-        // GET: Users/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -130,7 +139,6 @@ namespace UniHostel.Controllers
             return View(user);
         }
 
-        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)

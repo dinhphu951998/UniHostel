@@ -11,14 +11,19 @@ namespace UniHostel.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class BillAdvancedServiceDetail
     {
         public int ID { get; set; }
         public string AdvancedServiceID { get; set; }
         public string BillID { get; set; }
         public Nullable<System.DateTime> Time { get; set; }
+
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter a valid quantity")]
         public int Quantity { get; set; }
+
+        [Range(0, int.MaxValue, ErrorMessage = "The amount is not valid")]
         public int Amount { get; set; }
         public string Description { get; set; }
     

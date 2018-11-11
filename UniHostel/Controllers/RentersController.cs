@@ -23,7 +23,7 @@ namespace UniHostel.Controllers
                 var renters = db.Renters.Where(renter => renter.EndDate == null && renter.Room.HostID == user.ID);
                 return View(renters.ToList());
             }
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Rooms");
         }
 
         // GET: Renters/Details/5

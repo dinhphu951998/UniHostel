@@ -11,7 +11,8 @@ namespace UniHostel.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Bill
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,8 +24,13 @@ namespace UniHostel.Models
     
         public string ID { get; set; }
         public System.DateTime Time { get; set; }
+
+        [Range(1, float.MaxValue, ErrorMessage = "The fee could not be negative")]
         public Nullable<float> OtherFee { get; set; }
+
+        [Range(1, float.MaxValue, ErrorMessage = "Total is not a valid number (It must be greater than 0)")]
         public float Total { get; set; }
+
         public Nullable<bool> isPaid { get; set; }
         public string Description { get; set; }
         public string RoomID { get; set; }

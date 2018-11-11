@@ -26,7 +26,7 @@ namespace UniHostel.Controllers
                                                             && user.ID == s.HostID);
                 return View(compulsoryServices.ToList());
             }
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Rooms");
         }
 
         // GET: CompulsoryServices/Details/5
@@ -51,7 +51,7 @@ namespace UniHostel.Controllers
             {
                 return View();
             }
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Rooms");
         }
         
 
@@ -62,17 +62,20 @@ namespace UniHostel.Controllers
             User user = Session["User"] as User;
             if(user != null)
             {
-                string ID = Utils.getRandomID();
-                compulsoryService.ID = ID;
-                compulsoryService.isActive = true;
-                db.CompulsoryServices.Add(compulsoryService);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                ModelState["ID"].Errors.Clear();
+                if (ModelState.IsValid)
+                {
+                    string ID = Utils.getRandomID(10);
+                    compulsoryService.ID = ID;
+                    compulsoryService.isActive = true;
+                    db.CompulsoryServices.Add(compulsoryService);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Rooms");
         }
 
-        // GET: CompulsoryServices/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)

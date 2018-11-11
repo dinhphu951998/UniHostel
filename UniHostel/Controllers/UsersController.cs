@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using UniHostel.ExtensionMethod;
 using UniHostel.Models;
 using UniHostel.Models.ViewModel;
 
@@ -32,7 +33,7 @@ namespace UniHostel.Controllers
                 }
                 return View(resource, user);
             }
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Rooms");
         }
 
         [HttpPost]
@@ -95,7 +96,7 @@ namespace UniHostel.Controllers
                     return View("RenterDetails", user);
                 }
             }
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Rooms");
         }
 
         private int CheckRoomIDIsAvailable(string roomID)
@@ -123,7 +124,7 @@ namespace UniHostel.Controllers
                 ChangePasswordViewModel viewModel = new ChangePasswordViewModel(user);
                 return View(viewModel);
             }
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Rooms");
         }
 
         [HttpPost]
@@ -139,13 +140,13 @@ namespace UniHostel.Controllers
                     {
                         ModelState.AddModelError("ConfirmPassword", "Password is not matched");
                     }
-                    else if (!user.Password.Equals(viewModel.Password))
+                    else if (!user.Password.Equals(viewModel.Password.ComputeSha256Hash()))
                     {
                         ModelState.AddModelError("Password", "Password is not true");
                     }
                     else
                     {
-                        user.Password = viewModel.NewPassword;
+                        user.Password = viewModel.NewPassword.ComputeSha256Hash();
                         db.SaveChanges();
                         return RedirectToAction("Details");
                     }
@@ -156,7 +157,7 @@ namespace UniHostel.Controllers
                 return View(viewModel);
 
             }
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Rooms");
         }
 
         protected override void Dispose(bool disposing)
