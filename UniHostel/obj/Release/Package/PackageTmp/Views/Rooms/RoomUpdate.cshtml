@@ -38,6 +38,13 @@
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 <input type="hidden" name="ID" value="@Model.ID" />
                                 <div class="form-group">
+                                    <label class="col-md-3 control-label">Room ID</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.ID, new { @class = "form-control", @readonly ="true"} )
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
                                     <label class="col-md-3 control-label">Name <small class="red">*</small></label>
                                     <div class="col-md-8">
                                         <input data-original-title="Họ" data-toggle="tooltip" data-placement="top" class="form-control form" type="text" placeholder="Please enter name" name="Name" value="@Model.Name" required>
@@ -56,7 +63,7 @@
                                     <div class="col-md-8">
                                         <input data-original-title="Điện thoai" data-toggle="tooltip"
                                                data-placement="top" class="form-control form" type="text" placeholder="Please enter Price"
-                                               name="Price" value="@Model.Price" required>
+                                               name="Price" value="@Model.Price.ToString("N0")" required>
                                     </div>
                                 </div>
                                 <hr class="soften">

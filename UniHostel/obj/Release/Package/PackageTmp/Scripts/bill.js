@@ -60,17 +60,21 @@ function calculateCompulServiceMoney(obj) {
     var preNum = +$(".PreNum").eq(i).val();
     var price = +$(".unit-price").eq(i).text();
     var amount = (curNum - preNum) * price;
-    $(".amount").eq(i).text(amount);
+    if (amount >= 0) {
+        $(".amount").eq(i).text(amount);    
+    }
     calculateTotal(null);
 }
 
 function calculateAdvancedServiceMoney(obj) {
     var quantity = +$(obj).val();
-    console.log(obj);
     var price = +$(obj).parents('tr').find(".unit-price").text();
-    var amount = quantity * price;
-    $(obj).parent('td').siblings(".amount").text(amount);
-    calculateTotal(null);
+    if (quantity >= 0 && price > 0) {
+        console.log(obj);
+        var amount = quantity * price;
+        $(obj).parent('td').siblings(".amount").text(amount);
+        calculateTotal(null);
+    }
 }
 
 var calculateTotal = function (obj) {

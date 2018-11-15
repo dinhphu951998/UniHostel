@@ -107,6 +107,7 @@ namespace UniHostel.Controllers
                     var roleRenterID = _db.Roles.Single(r => r.RoleName == "Renter").RoleID;
                     user.RoleID = roleRenterID;
                     user.isActive = true;
+                    user.Password = user.Password.ComputeSha256Hash();
                     _db.Users.Add(user);
 
                     renter.ID = userID;

@@ -83,6 +83,7 @@ namespace UniHostel.Controllers
                 if (CheckRoomIDIsAvailable(roomID) == 1)
                 {
                     var renter = db.Renters.Find(user.ID);
+                    renter.Room.isAvailable = true;
                     renter.RoomID = roomID;
                     renter.EndDate = null;
                     var room = db.Rooms.Find(roomID);

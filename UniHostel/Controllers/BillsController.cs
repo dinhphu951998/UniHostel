@@ -69,9 +69,9 @@ namespace UniHostel.Controllers
             ViewBag.RenterID = new SelectList(db.Renters, "ID", "FullName");
             var rooms = db.Rooms.Where(r => r.HostID == user.ID && r.Host.isActive == true && r.isAvailable == false
                                             && !r.Bills.Any(b => DateTime.Now.Month == b.Time.Month && DateTime.Now.Year == b.Time.Year));
-            List<CompulsoryService> compulsoryServices = db.CompulsoryServices.Where(c => c.isActive == true)
+            List<CompulsoryService> compulsoryServices = db.CompulsoryServices.Where(c => c.isActive == true && c.HostID == user.ID)
                                                                               .ToList();
-            List<AdvancedService> advancedServices = db.AdvancedServices.Where(a => a.isActive == true)
+            List<AdvancedService> advancedServices = db.AdvancedServices.Where(a => a.isActive == true && a.HostID == user.ID)
                                                                               .ToList();
             ViewData["CompulsoryService"] = compulsoryServices;
             ViewData["AdvancedService"] = advancedServices;

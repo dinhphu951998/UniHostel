@@ -62,7 +62,7 @@ namespace UniHostel.Controllers
             User user = Session["User"] as User;
             if(user != null)
             {
-                ModelState["ID"].Errors.Clear();
+                ModelState["ID"]?.Errors?.Clear();
                 if (ModelState.IsValid)
                 {
                     string ID = Utils.getRandomID(10);
